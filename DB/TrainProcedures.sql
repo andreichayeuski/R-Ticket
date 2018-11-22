@@ -24,7 +24,7 @@ begin
 	values (@typeId, @number)
 	set @countAfter = (select count(*) from Train)
 	set @result = @countAfter - @countBefore
-	select @result
+	select @result as result
 end
 
 

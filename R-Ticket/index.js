@@ -29,7 +29,7 @@ Handlebars.registerHelper('link', function(object) {
 app.set('view engine', 'hbs');
 
 app.use('/train', require('./routers/train/train'));
-app.use('/cities', require('./routers/cities'));
+app.use('/station', require('./routers/station/station'));
 
 app.get('/', (req, res) => {
 	res.render('index');

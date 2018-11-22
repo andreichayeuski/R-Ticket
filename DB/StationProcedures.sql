@@ -1,0 +1,21 @@
+use [R-Ticket]
+select * from Station
+
+go
+create procedure AddNewStation
+	@name nvarchar(max),
+	@description text,
+	@latitude float,
+	@longitude float
+as
+begin
+	declare @countBefore int,
+			@countAfter int,
+			@result int
+	set @countBefore = (select count(*) from Station)
+	insert into [Station] ([Name], [Description], Latitude, Longitude)
+	values (@name, @description, @latitude, @longitude)
+	set @countAfter = (select count(*) from Station)
+	set @result = @countAfter - @countBefore
+	select @result as result
+end
