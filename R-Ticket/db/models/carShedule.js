@@ -1,10 +1,10 @@
 module.exports = (Sequelize, sequelize) => {
-	return sequelize.define('carRoutes', {
+	return sequelize.define('CarShedule', {
 		CarId: {
 			type: Sequelize.INTEGER,
 			allowNull: false
 		},
-		RoutesId: {
+		SheduleRoutesId: {
 			type: Sequelize.INTEGER,
 			allowNull: false
 		}

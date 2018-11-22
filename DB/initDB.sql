@@ -111,20 +111,19 @@ GO
 ALTER DATABASE [R-Ticket] SET  READ_WRITE 
 GO
 
-
 use [R-Ticket];
 
 create table TrainType -- типы поездов (международный бизнес/эконом и т.п.)
 (
 	Id int identity(1,1) primary key,
-	[Type] nvarchar(max) not null
+	[Name] nvarchar(max) not null
 )
 
 create table Station -- географические станции
 (
 	Id int identity(1,1) primary key,
 	[Name] nvarchar(max) not null,
-	[Description] nvarchar(max) null,
+	[Description] text null,
 	Latitude float not null,
 	Longitude float not null
 )
@@ -139,93 +138,136 @@ create table Train -- поезда
 create table [Routes] -- маршруты
 (
 	Id int identity(1,1) primary key,
-	DepartureStationid int foreign key references Station not null,
+	DepartureStationId int foreign key references Station not null,
 	ArrivalStationId int foreign key references Station not null,
 	TrainId int foreign key references Train not null,
-	DepartureDate datetime not null,
-	ArrivalDate datetime not null
+	DepartureTime time not null,
+	ArrivalTime time not null,
 )
 
-create table WeekDay -- дни недели
+create table [WeekDay] -- дни недели
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(max) not null
+	[Name] nvarchar(12) not null unique
 )
 
 create table Shedule -- расписание под конкретный день (дату), поезд (вагоны)
 (
 	Id int identity(1,1) primary key,
-	TrainId int foreign key references Train not null,
+	[Date] date not null unique
+)
+
+create table SheduleRoutes
+(
+	Id int identity(1,1) primary key,
+	RoutesId int foreign key references [Routes] not null,
+	SheduleId int foreign key references [Shedule] not null
 )
 
 create table DaysOfRunning -- дни курсирования
 (
 	Id int identity(1,1) primary key,
-	TrainsID int foreign key references Train not null,
-	WeekDayId int foreign key references WeekDay not null
+	TrainId int foreign key references Train not null,
+	WeekDayId int foreign key references [WeekDay] null,
+	Even bit null
 )
 
-create table PlacesType -- типы билетов (плацкарт, купе и т.п.)
+create table PlaceType -- типы билетов (плацкарт, купе и т.п.)
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(max) not null,
+	[Name] nvarchar(30) not null,
 	Code nvarchar(2) not null
 )
 
-create table SpacesType -- типы мест (нижний, верхний, боковой)
+create table SpaceType -- типы мест (нижний, верхний, боковой)
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(max) not null
+	[Name] nvarchar(20) not null
+)
+
+create table CarType -- С кондиционером, зимний, можно животных и т.д.
+(
+	Id int identity(1,1) primary key,
+	[Code] nvarchar(5) not null unique,
+	[Description] text not null
 )
 
 create table Car -- Вагоны
 (
 	Id int identity(1,1) primary key,
-	PlacesTypeId int foreign key references PlacesType,
-	SheduleId int foreign key references Shedule
+	CarTypeId int foreign key references CarType not null,
+	PlaceTypeId int foreign key references PlaceType not null
+)
+
+create table CarShedule
+(
+	CarId int foreign key references Car not null,
+	SheduleRoutesId int foreign key references [SheduleRoutes] not null
 )
 
 create table [Space]
 (
 	Id int identity(1,1) primary key,
-	CarId int foreign key references Car,
-	SpacesTypeId int foreign key references SpacesType,
+	CarId int foreign key references Car not null,
+	SpaceTypeId int foreign key references SpaceType not null
 )
 
 create table Country
 (
 	Id int identity(1,1) primary key,
 	[Name] nvarchar(max) not null,
-	[Description] nvarchar(max) null
+	[Description] text null
 )
 
 create table UserDB
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(max) not null,
-	[Password] nvarchar(max) not null
+	[Name] nvarchar(30) not null,
+	[Password] nvarchar(30) not null
 )
 
 create table UserRole
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(max) not null
+	[Name] nvarchar(20) not null
 )
 
 create table [User]
 (
 	Id int identity(1,1) primary key,
-	FName nvarchar(max) not null,
-	SName nvarchar(max) not null,
-	MName nvarchar(max) not null,
-	Email nvarchar(max) not null,
-	Birthday datetime not null,
+	FName nvarchar(50) not null,
+	SName nvarchar(50) not null,
+	MName nvarchar(50) null,
+	Email nvarchar(50) not null,
+	Birthday date not null,
 	Sex bit not null,
-	Passport nvarchar(max) not null,
-	FNameEn nvarchar(max) not null,
-	SNameEn nvarchar(max) not null,
-	Telephone nvarchar(max) not null,
-	[Login] nvarchar(max) not null,
-	[Password] nvarchar(30) not null
+	Passport nvarchar(30) not null,
+	FNameEn nvarchar(50) not null,
+	SNameEn nvarchar(50) not null,
+	Telephone nvarchar(20) null,
+	[Login] nvarchar(50) not null,
+	[Password] nvarchar(30) not null,
+	CountryId int foreign key references Country not null
+)
 
+create table Price
+(
+	Id int identity(1,1) primary key,
+	[Value] float not null
+)
+
+create table Ticket
+(
+	Id int identity(1,1) primary key,
+	PriceId int foreign key references Price not null,
+	SpaceId int foreign key references [Space] not null,
+	UserId int foreign key references [User] null
+)
+
+create table TicketHistory
+(
+	Id int identity(1,1) primary key,
+	TicketId int foreign key references Ticket not null,
+	[SellDate] datetime not null,
+	[ReturnDate] datetime null
 )

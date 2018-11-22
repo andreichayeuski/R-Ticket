@@ -13,14 +13,18 @@ module.exports = (sequelize, connection) =>{
 			},
 		Description:
 			{
-				type: sequelize.STRING,
+				type: sequelize.TEXT,
 				allowNull: true
 			},
-		latitude: {
-			type: sequelize.DOUBLE
-		},
-		longitude: {
-			type: sequelize.DOUBLE
-		},
+		Latitude:
+			{
+				type: sequelize.DOUBLE,
+				allowNull: false
+			},
+		Longitude:
+			{
+				type: sequelize.DOUBLE,
+				allowNull: false
+			}
 	});
 };

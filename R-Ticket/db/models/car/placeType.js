@@ -1,5 +1,5 @@
 module.exports = (sequelize, connection) =>{
-	return connection.define('placesType', {
+	return connection.define('PlaceType', {
 		ID:
 			{
 				type: sequelize.INTEGER,
