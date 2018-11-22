@@ -9,12 +9,26 @@ router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
+	let types = [],	stations = [];
 	db.sequelize.query('GetTrainTypes')
 		.then((result) => {
-			res.render('index',
-				{
-					layout: 'train/create',
-					types: result[0]
+			console.log(result[0]);
+			types = result[0];
+			db.sequelize.query('GetStation')
+				.then((result) => {
+					console.log(result[0]);
+					stations = result[0];
+					console.log(types);
+					console.log(stations);
+					res.render('index',
+						{
+							layout: 'train/create',
+							types: types,
+							stations: stations
+						});
+				})
+				.error((err) => {
+					console.log(err);
 				});
 		})
 		.error((err) => {
@@ -24,11 +38,13 @@ router.get('/', (req, res) => {
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddNewTrain :typeId, :number', {
+	db.sequelize.query('AddNewTrain :typeId, :number, :departureStationId, :arrivalStationId', {
 		replacements:
 			{
 				typeId: req.body.trainType,
-				number: req.body.number
+				number: req.body.number,
+				departureStationId: parseInt(req.body.departureStationId),
+				arrivalStationId: parseInt(req.body.arrivalStationId)
 			}
 	})
 		.then((result) => {

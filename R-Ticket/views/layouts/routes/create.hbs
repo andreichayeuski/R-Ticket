@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>new train</title>
+    <title>new route</title>
 </head>
 <body>
-<form action="http://r-ticket.chav:6608/train/create" method="POST">
+<form action="http://r-ticket.chav:6608/routes/create" method="POST">
     <label>Номер поезда
         <input type="text" name="number" size="50" maxlength="5">
     </label>
@@ -19,7 +19,7 @@
     </label>
     <br>
     <label>Начальная станция
-        <select size="1" name="departureStationId">
+        <select size="1" name="DepartureStationId">
             <option disabled selected>Выберите начальную станцию</option>
             {{#stations as |station|}}
                 <option value="{{station.Id}}">{{station.Name}}</option>
@@ -27,7 +27,7 @@
         </select>
     </label>
     <label>Конечная станция
-        <select size="1" name="arrivalStationId">
+        <select size="1" name="ArrivalStationId">
             <option disabled selected>Выберите конечную станцию</option>
             {{#stations as |station|}}
                 <option value="{{station.Id}}">{{station.Name}}</option>

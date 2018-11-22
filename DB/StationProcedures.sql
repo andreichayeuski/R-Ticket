@@ -19,3 +19,14 @@ begin
 	set @result = @countAfter - @countBefore
 	select @result as result
 end
+
+go
+create procedure GetStation
+as
+begin
+	select * from Station;
+end
+
+--update Station
+--	set [Name] = 'Минск-Пассажирский'
+--		where [Name] = 'Минск'

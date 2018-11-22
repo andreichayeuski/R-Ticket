@@ -1,0 +1,16 @@
+{
+  "db": "R-Ticket",
+  "username": "defaultR-Ticket",
+  "password": "default",
+  "port": 1433,
+  "host": "ANDREICHAYEUSKI",
+  "dialect": "mssql",
+  "dialectOptions": {
+    "instanceName": "MSSQLSERVER",
+    "encrypt": true
+  },
+  "define": {
+    "timestamps": true,
+    "paranoid": true
+  }
+}

@@ -132,7 +132,9 @@ create table Train -- поезда
 (
 	Id int identity(1,1) primary key,
 	TypeId int foreign key references TrainType not null,
-	[Number] nvarchar(5) unique not null
+	[Number] nvarchar(5) unique not null,
+	DepartureStationId int foreign key references Station not null,
+	ArrivalStationId int foreign key references Station not null
 )
 
 create table [Routes] -- маршруты
@@ -148,7 +150,8 @@ create table [Routes] -- маршруты
 create table [WeekDay] -- дни недели
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(12) not null unique
+	[Name] nvarchar(12) not null unique,
+	[Code] nvarchar(2) not null unique
 )
 
 create table Shedule -- расписание под конкретный день (дату), поезд (вагоны)
