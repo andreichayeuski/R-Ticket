@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Расписание</title>
+    {{> header}}
+</head>
+<body>
+<form action="http://r-ticket.chav:6608/shedule/create" method="POST">
+    <fieldset style="width: 245px">
+        <legend>Добавить новую дату в расписание</legend>
+        <label>Дата
+            <input type="date" name="date" size="50">
+        </label>
+        <input type="submit">
+    </fieldset>
+</form>
+</body>
+</html>

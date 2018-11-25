@@ -1,6 +1,25 @@
 use [R-Ticket]
 
 go
+create procedure AddShedule
+	@date date
+as
+begin
+	declare @countBefore int,
+			@countAfter int,
+			@result int
+	set @countBefore = (select count(*) from Shedule)
+	if ((select count(*) from Shedule where [Date] = @date) != 1)
+	insert into [Shedule] ([Date])
+	values (@date)
+	set @countAfter = (select count(*) from Shedule)
+	set @result = @countAfter - @countBefore
+	select @result as result
+end;
+
+select * from Shedule
+
+go
 create procedure ShowSheduleOnStation
 	@StationId int
 as
@@ -11,16 +30,3 @@ begin
 				where SheduleId in (select Id from Shedule
 										where [Date] = cast (GETDATE() as date)));
 end;
-
-go
-create procedure AddNewRoute
-	@depStationId int,
-	@arrStationId int,
-	@trainId int,
-	@depTime time,
-	@arrTime time
-as
-begin
-	insert into [Routes]
-	values (@depStationId, @arrStationId, @trainId, @depTime, @arrTime)
-end

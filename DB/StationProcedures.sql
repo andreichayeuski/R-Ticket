@@ -2,7 +2,7 @@ use [R-Ticket]
 select * from Station
 
 go
-create procedure AddNewStation
+create procedure AddStation
 	@name nvarchar(max),
 	@description text,
 	@latitude float,

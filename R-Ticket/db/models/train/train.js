@@ -16,6 +16,16 @@ module.exports = (sequelize, connection) =>{
 			{
 				type: sequelize.INTEGER,
 				allowNull: false,
+			},
+		DepartureStationId:
+			{
+				type: sequelize.INTEGER,
+				allowNull: false
+			},
+		ArrivalStationId:
+			{
+				type: sequelize.INTEGER,
+				allowNull: false
 			}
 	});
 };

@@ -2,8 +2,12 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const path = require('path');
 const favicon = require('serve-favicon');
+const Handlebars = require('handlebars');
+Handlebars.registerPartial('header', 'header');
 
 const app = express();
+
+app.use(express.static(__dirname + '/public'));
 
 app.engine('hbs', hbs({
 	extname: 'hbs',
@@ -18,7 +22,8 @@ app.set('view engine', 'hbs');
 
 app.use('/train', require('./routers/train/train'));
 app.use('/station', require('./routers/station/station'));
-app.use('/station', require('./routers/routes/routes'));
+app.use('/routes', require('./routers/routes/routes'));
+app.use('/shedule', require('./routers/shedule/shedule'));
 
 app.get('/', (req, res) => {
 	res.render('index');

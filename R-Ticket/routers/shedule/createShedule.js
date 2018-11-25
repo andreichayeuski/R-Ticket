@@ -7,31 +7,19 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 router.use(bodyParser.json());
 
-router.get('/', (req, res) => {
-	console.log(req.originalUrl);
-	res.render('index',
-		{
-			layout: 'station/create'
-		});
-});
-
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddStation :name, :description, :latitude, :longitude', {
+	db.sequelize.query('AddShedule :date', {
 		replacements:
 			{
-				name: req.body.name,
-				description: req.body.description,
-				latitude: parseFloat(req.body.latitude),
-				longitude: parseFloat(req.body.longitude)
+				date: req.body.date
 			}
 	})
 		.then((result) => {
 			console.log(result[0][0]);
 			if (result[0][0].result === 1)
 			{
-				window.alert("Станция успешно добавлена!");
-				res.redirect('http://r-ticket.chav:6608/station/create');
+				res.redirect('http://r-ticket.chav:6608/shedule');
 			}
 			else
 			{

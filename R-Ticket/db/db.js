@@ -60,6 +60,8 @@ module.exports = (Sequelize)=>
 	const ticketHistory = TicketHistory(Sequelize, sequelize);
 
 	train.belongsTo(trainType, { foreignKey: 'TypeId' });
+	train.belongsTo(station, { foreignKey: 'DepartureStationId' });
+	train.belongsTo(station, { foreignKey: 'ArrivalStationId' });
 	routes.belongsTo(station, { foreignKey: 'DepartureStationId' });
 	routes.belongsTo(station, { foreignKey: 'ArrivalStationId' });
 	routes.belongsTo(train, { foreignKey: 'TrainId' });

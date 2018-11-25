@@ -9,28 +9,50 @@ router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
-	res.render('index',
-		{
-			layout: 'station/create'
+	let trains = [], stations = [];
+	db.sequelize.query('GetTrain')
+		.then((result) => {
+			console.log(result[0]);
+			trains = result[0];
+			db.sequelize.query('GetStation')
+				.then((result) => {
+					console.log(result[0]);
+					stations = result[0];
+					console.log(trains);
+					console.log(stations);
+					res.render('index',
+						{
+							layout: 'routes/create',
+							trains: trains,
+							stations: stations
+						});
+				})
+				.error((err) => {
+					console.log(err);
+				});
+		})
+		.error((err) => {
+			console.log(err);
 		});
 });
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddNewStation :name, :description, :latitude, :longitude', {
+	db.sequelize.query('AddRoute :depStationId, :arrStationId, :trainId, :depTime, :arrTime', {
 		replacements:
 			{
-				name: req.body.name,
-				description: req.body.description,
-				latitude: parseFloat(req.body.latitude),
-				longitude: parseFloat(req.body.longitude)
+				depStationId: parseInt(req.body.depStationId),
+				arrStationId: parseInt(req.body.arrStationId),
+				trainId: parseInt(req.body.trainId),
+				depTime: req.body.depTime,
+				arrTime: req.body.arrTime
 			}
 	})
 		.then((result) => {
 			console.log(result[0][0]);
 			if (result[0][0].result === 1)
 			{
-				res.redirect('http://r-ticket.chav:6608/station/create');
+				res.redirect('http://r-ticket.chav:6608/routes/create');
 			}
 			else
 			{

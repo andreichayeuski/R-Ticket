@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>new train</title>
+    <title>Добавить поезд</title>
+    {{> header}}
 </head>
 <body>
 <form action="http://r-ticket.chav:6608/train/create" method="POST">
     <label>Номер поезда
-        <input type="text" name="number" size="50" maxlength="5">
+        <input type="text" name="number" size="10" maxlength="5">
     </label>
     <label>Тип поезда
         <select size="1" name="trainType">
@@ -26,6 +27,7 @@
             {{/stations}}
         </select>
     </label>
+    <br>
     <label>Конечная станция
         <select size="1" name="arrivalStationId">
             <option disabled selected>Выберите конечную станцию</option>
@@ -34,6 +36,7 @@
             {{/stations}}
         </select>
     </label>
+    <br>
     <input type="submit">
 </form>
 </body>

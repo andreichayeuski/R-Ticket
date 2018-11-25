@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Маршруты</title>
+    {{> header}}
+</head>
+<p>
+
+    <h1>Маршруты</h1>
+    <a href="http://r-ticket.chav:6608/routes/create">Новый маршрут</a>
+    <table>
+    {{#routes as |route|}}
+        <tr>
+            <td>{{route.Number}}</td>
+            <td>{{route.DepartureStation}}<br>{{{time route.DepartureTime}}}</td>
+            <td>{{route.ArrivalStation}}<br>{{{time route.ArrivalTime}}}</td>
+        </tr>
+    {{/routes}}
+    </table>
+</div>
+</body>
+</html>

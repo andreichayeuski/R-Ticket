@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>new station</title>
+    {{> header}}
 </head>
 <body>
 <form action="http://r-ticket.chav:6608/station/create" method="POST">
@@ -23,6 +24,9 @@
     </label>
     <br>
     <input type="submit">
+    <input type="reset">
 </form>
+<br>
+<a href="http://r-ticket.chav:6608/station">Вернуться к списку станций</a>
 </body>
 </html>
