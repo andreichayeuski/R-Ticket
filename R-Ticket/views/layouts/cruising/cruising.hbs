@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Дни курсирования</title>
+    {{> header}}
+</head>
+<body>
+<div class="div">
+    <h1>Дни курсирования</h1>
+    <a href="http://r-ticket.chav:6608/cruising/create">Изменить дни курсирования</a>
+    {{#cruising as |cruis|}}
+        <p>{{cruis.Number}}: {{cruis.DepartureStation}} - {{cruis.ArrivalStation}}</p>
+        {{cruis.Type}}
+        {{cruis.IsDaily}} {{cruis.IsEven}}
+    {{/cruising}}
+</div>
+</body>
+</html>

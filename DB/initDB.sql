@@ -125,7 +125,8 @@ create table Station -- географические станции
 	[Name] nvarchar(max) not null,
 	[Description] text null,
 	Latitude float not null,
-	Longitude float not null
+	Longitude float not null,
+	IsStation bit not null
 )
 
 create table Train -- поезда
@@ -167,12 +168,19 @@ create table SheduleRoutes
 	SheduleId int foreign key references [Shedule] not null
 )
 
-create table DaysOfRunning -- дни курсирования
+create table Cruising-- дни курсирования
 (
 	Id int identity(1,1) primary key,
-	TrainId int foreign key references Train not null,
-	WeekDayId int foreign key references [WeekDay] null,
-	Even bit null
+	TrainId int foreign key references Train not null unique,
+	IsDaily bit not null,
+	IsEven bit null
+)
+
+create table WeekDayCruising
+(
+	Id int identity(1,1) primary key,
+	CruisingId int foreign key references Cruising not null,
+	WeekDayId int foreign key references [WeekDay] not null
 )
 
 create table PlaceType -- типы билетов (плацкарт, купе и т.п.)

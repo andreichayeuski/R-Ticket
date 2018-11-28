@@ -30,3 +30,28 @@ begin
 				where SheduleId in (select Id from Shedule
 										where [Date] = cast (GETDATE() as date)));
 end;
+
+go
+create procedure AddSheduleRoutes
+	@routesId int,
+	@sheduleId int
+as
+begin
+	declare @countBefore int,
+			@countAfter int,
+			@result int
+	set @countBefore = (select count(*) from SheduleRoutes)
+	insert into [SheduleRoutes] (RoutesId, SheduleId)
+	values (@routesId, @sheduleId)
+	set @countAfter = (select count(*) from SheduleRoutes)
+	set @result = @countAfter - @countBefore
+	select @result as result
+end;
+
+
+go
+create procedure ShowSheduleRoutes
+as
+begin
+	select * from [SheduleRoutes]
+end;

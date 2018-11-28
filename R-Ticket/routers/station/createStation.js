@@ -9,28 +9,37 @@ router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
-	res.render('index',
-		{
-			layout: 'station/create'
+	db.sequelize.query('GetStation')
+		.then((result) => {
+			console.log(result[0]);
+			stations = result[0];
+			res.render('index',
+				{
+					layout: 'station/create',
+					stations: stations
+				});
+		})
+		.error((err) => {
+			console.log(err);
 		});
 });
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddStation :name, :description, :latitude, :longitude', {
+	db.sequelize.query('AddStation :name, :description, :latitude, :longitude, :isStation', {
 		replacements:
 			{
 				name: req.body.name,
 				description: req.body.description,
 				latitude: parseFloat(req.body.latitude),
-				longitude: parseFloat(req.body.longitude)
+				longitude: parseFloat(req.body.longitude),
+				isStation: parseInt(req.body.isStation)
 			}
 	})
 		.then((result) => {
 			console.log(result[0][0]);
 			if (result[0][0].result === 1)
 			{
-				window.alert("Станция успешно добавлена!");
 				res.redirect('http://r-ticket.chav:6608/station/create');
 			}
 			else

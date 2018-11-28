@@ -38,4 +38,19 @@ begin
 		join Station s1 on s1.Id = t.DepartureStationId
 		join Station s2 on s2.Id = t.ArrivalStationId
 		join TrainType type1 on type1.Id = t.TypeId
+	order by t.Number desc
+end
+
+go
+create procedure GetTrainById
+	@trainId int
+as
+begin
+	select t.Id as Id, t.Number as Number, s1.[Name] as DepartureStation, s2.[Name] as ArrivalStation, type1.[Name] as [Type]
+		from Train t
+		join Station s1 on s1.Id = t.DepartureStationId
+		join Station s2 on s2.Id = t.ArrivalStationId
+		join TrainType type1 on type1.Id = t.TypeId
+	where t.Id = @trainId
+	order by t.Number desc
 end

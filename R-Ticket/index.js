@@ -24,6 +24,7 @@ app.use('/train', require('./routers/train/train'));
 app.use('/station', require('./routers/station/station'));
 app.use('/routes', require('./routers/routes/routes'));
 app.use('/shedule', require('./routers/shedule/shedule'));
+app.use('/cruising', require('./routers/cruising/cruising'));
 
 app.get('/', (req, res) => {
 	res.render('index');

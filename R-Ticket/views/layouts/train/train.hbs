@@ -7,7 +7,8 @@
 </head>
 <body>
 <div class="div">
-    <h1>Trains</h1>
+    <h1>Поезда</h1>
+    <a href="http://r-ticket.chav:6608/train/create">Новый поезд</a>
     {{#trains as |train|}}
         <p>{{train.Number}}: {{train.DepartureStation}} - {{train.ArrivalStation}}</p>
     {{/trains}}
