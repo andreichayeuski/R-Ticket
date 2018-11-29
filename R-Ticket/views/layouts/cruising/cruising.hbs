@@ -9,11 +9,19 @@
 <div class="div">
     <h1>Дни курсирования</h1>
     <a href="http://r-ticket.chav:6608/cruising/create">Изменить дни курсирования</a>
-    {{#cruising as |cruis|}}
-        <p>{{cruis.Number}}: {{cruis.DepartureStation}} - {{cruis.ArrivalStation}}</p>
-        {{cruis.Type}}
-        {{cruis.IsDaily}} {{cruis.IsEven}}
-    {{/cruising}}
+    <table>
+        {{#cruising as |cruis|}}
+            <tr>
+                <td>{{cruis.Number}}</td>
+                <td>{{cruis.DepartureStation}} - {{cruis.ArrivalStation}}
+                    <br>
+                    <span>{{cruis.Type}}</span>
+                </td>
+                <td>
+                {{{weekDayHelper a cruisId=cruis.Id}}} {{{isDaily cruis.IsDaily}}} {{{isEven cruis.IsEven}}}</td>
+            </tr>
+        {{/cruising}}
+    </table>
 </div>
 </body>
 </html>

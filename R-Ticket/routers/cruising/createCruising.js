@@ -72,6 +72,10 @@ router.post('/', urlencodedParser, (req, res) => {
 					);
 					res.redirect('http://r-ticket.chav:6608/cruising/create');
 				}
+				else
+				{
+					res.redirect('http://r-ticket.chav:6608/cruising/create');
+				}
 			}
 			else
 			{

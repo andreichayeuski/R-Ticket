@@ -1,5 +1,4 @@
 use [R-Ticket]
-select * from Train
 
 go
 create procedure AddTrain

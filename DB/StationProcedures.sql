@@ -28,7 +28,9 @@ begin
 	select * from Station
 		order by [Name]
 end
-
+update Station
+	set Longitude = 26.953044, Latitude = 54.283870
+	where Id = 11
 go
 create procedure GetOneStation
 	@id int

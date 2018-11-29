@@ -1,17 +1,20 @@
 use [R-Ticket]
 
 go
-create alter procedure GetCruising
+create procedure GetCruising
 as
 begin
 	select c.Id as Id, c.IsDaily as IsDaily, c.IsEven as IsEven, t.Number as Number, 
-	s1.[Name] as DepartureStation, s2.[Name] as ArrivalStation, type1.[Name] as [Type]
+	s1.[Name] as DepartureStation, s2.[Name] as ArrivalStation, type1.[Name] as [Type],
+	w.[Name] as [WeekDay], w.Code as [WeekDayCode]
 		from Cruising c
 		join Train t on t.Id = c.TrainId
 		join Station s1 on s1.Id = t.DepartureStationId
 		join Station s2 on s2.Id = t.ArrivalStationId
 		join TrainType type1 on type1.Id = t.TypeId
-	order by t.Number desc
+		full join WeekDayCruising wd on wd.CruisingId = c.Id
+		left join [WeekDay] w on w.Id = wd.WeekDayId
+	order by t.Number desc, w.Id asc
 end;
 
 go
@@ -22,7 +25,7 @@ begin
 end;
 
 go
-create alter procedure AddCruising
+create procedure AddCruising
 	@trainId int,
 	@isDaily int,
 	@isEven int

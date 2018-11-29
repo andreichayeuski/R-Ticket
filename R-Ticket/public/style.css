@@ -41,7 +41,7 @@ ul li {
 
 header,
 section,
-.container,
+.header,
 .box {
     margin: 0;
     overflow: hidden;
@@ -171,7 +171,7 @@ menu {
     transition: all .5s ease-in-out;
 }
 
-menu .container {
+menu .header {
     height: 100%;
     margin: 0 auto;
     overflow: hidden;
@@ -188,7 +188,7 @@ menu .container {
     transition: all .5s ease-in-out;
 }
 
-menu .container .box {
+menu .header .box {
     border-top: 3px solid;
     height: calc(100% - 33px);
     overflow: visible;
@@ -253,7 +253,7 @@ html.active menu {
     z-index: 999;
 }
 
-html.active menu .container {
+html.active menu .header {
     -webkit-transform-origin: 0% 50% 0px;
     -moz-transform-origin: 0% 50% 0px;
     transform-origin: 0% 50% 0px;
