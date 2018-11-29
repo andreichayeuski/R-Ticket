@@ -141,11 +141,17 @@ create table Train -- поезда
 create table [Routes] -- маршруты
 (
 	Id int identity(1,1) primary key,
-	DepartureStationId int foreign key references Station not null,
-	ArrivalStationId int foreign key references Station not null,
+	RoutesStationId int foreign key references RoutesStation not null,
 	TrainId int foreign key references Train not null,
 	DepartureTime time not null,
 	ArrivalTime time not null,
+)
+
+create table RoutesStation
+(
+	Id int identity(1,1) primary key,
+	DepartureStationId int foreign key references Station not null,
+	ArrivalStationId int foreign key references Station not null
 )
 
 create table [WeekDay] -- дни недели
@@ -167,7 +173,13 @@ create table SheduleRoutes
 	RoutesId int foreign key references [Routes] not null,
 	SheduleId int foreign key references [Shedule] not null
 )
-
+select * from RoutesStation
+select * from Station where Id = 9
+select * from [Routes]
+update [Routes]
+set RoutesStationId = 7
+where Id = 15
+select * from Train where Id = 12
 create table Cruising-- дни курсирования
 (
 	Id int identity(1,1) primary key,

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const createRoutes = require('./createRoutes');
+const bindRoutes = require('./bindRoutes');
 const db = require('../../db/db')(require('sequelize'));
 const Handlebars = require('handlebars');
 
@@ -14,6 +15,7 @@ Handlebars.registerHelper('time', (str) =>
 });
 
 router.use('/create', createRoutes);
+router.use('/bind', bindRoutes);
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);

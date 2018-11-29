@@ -9,26 +9,16 @@ router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
-	let trains = [], stations = [];
-	db.sequelize.query('GetTrain')
+	let stations = [];
+	db.sequelize.query('GetStation')
 		.then((result) => {
 			console.log(result[0]);
-			trains = result[0];
-			db.sequelize.query('GetStation')
-				.then((result) => {
-					console.log(result[0]);
-					stations = result[0];
-					console.log(trains);
-					console.log(stations);
-					res.render('index',
-						{
-							layout: 'routes/create',
-							trains: trains,
-							stations: stations
-						});
-				})
-				.error((err) => {
-					console.log(err);
+			stations = result[0];
+			console.log(stations);
+			res.render('index',
+				{
+					layout: 'routes/create',
+					stations: stations
 				});
 		})
 		.error((err) => {
@@ -38,14 +28,11 @@ router.get('/', (req, res) => {
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddRoute :depStationId, :arrStationId, :trainId, :depTime, :arrTime', {
+	db.sequelize.query('AddRoute :depStationId, :arrStationId', {
 		replacements:
 			{
 				depStationId: parseInt(req.body.depStationId),
-				arrStationId: parseInt(req.body.arrStationId),
-				trainId: parseInt(req.body.trainId),
-				depTime: req.body.depTime,
-				arrTime: req.body.arrTime
+				arrStationId: parseInt(req.body.arrStationId)
 			}
 	})
 		.then((result) => {
