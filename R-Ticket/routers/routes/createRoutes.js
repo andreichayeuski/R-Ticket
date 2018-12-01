@@ -14,11 +14,20 @@ router.get('/', (req, res) => {
 		.then((result) => {
 			console.log(result[0]);
 			stations = result[0];
-			console.log(stations);
-			res.render('index',
-				{
-					layout: 'routes/create',
-					stations: stations
+			db.sequelize.query('GetRoutesStation')
+				.then((result) => {
+					console.log(result[0]);
+					let routesStation = result[0];
+					console.log(stations);
+					res.render('index',
+						{
+							layout: 'routes/create',
+							stations: stations,
+							routesStations: routesStation
+						});
+				})
+				.error((err) => {
+					console.log(err);
 				});
 		})
 		.error((err) => {

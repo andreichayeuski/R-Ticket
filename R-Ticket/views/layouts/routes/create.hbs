@@ -27,6 +27,12 @@
         <br>
         <input type="submit">
     </form>
+    <br>
+    <table>
+        {{#routesStations as |routesStation|}}
+            <p>{{routesStation.DepartureStation}} - {{routesStation.ArrivalStation}}</p>
+        {{/routesStations}}
+    </table>
 </div>
 </body>
 </html>

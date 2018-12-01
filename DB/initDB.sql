@@ -174,8 +174,11 @@ create table SheduleRoutes
 	SheduleId int foreign key references [Shedule] not null
 )
 select * from RoutesStation
-select * from Station where Id = 9
+select * from Station where Id = 33
 select * from [Routes]
+update RoutesStation
+set ArrivalStationId = 33
+where Id = 25
 update [Routes]
 set RoutesStationId = 7
 where Id = 15
@@ -198,7 +201,8 @@ create table WeekDayCruising
 create table PlaceType -- типы билетов (плацкарт, купе и т.п.)
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(30) not null,
+	[Name] nvarchar(70) not null,
+	ShortName nvarchar(20) not null,
 	Code nvarchar(2) not null
 )
 
@@ -224,6 +228,8 @@ create table Car -- Вагоны
 
 create table CarShedule
 (
+	Id int identity(1,1) primary key,
+	[Number] int not null,
 	CarId int foreign key references Car not null,
 	SheduleRoutesId int foreign key references [SheduleRoutes] not null
 )
@@ -231,6 +237,7 @@ create table CarShedule
 create table [Space]
 (
 	Id int identity(1,1) primary key,
+	[Number] int not null,
 	CarId int foreign key references Car not null,
 	SpaceTypeId int foreign key references SpaceType not null
 )
