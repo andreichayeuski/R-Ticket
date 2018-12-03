@@ -29,3 +29,9 @@ values ('Спальный вагон (двухместное купе)', 'СВ', 'СВ'),
 
 select * from PlaceType
 
+insert into CarType
+values ('3П', 'Плацкартный'),
+('2B', 'Вагон с услугами')
+
+select * from CarType
+

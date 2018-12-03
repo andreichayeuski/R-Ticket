@@ -206,13 +206,7 @@ create table PlaceType -- типы билетов (плацкарт, купе и т.п.)
 	Code nvarchar(2) not null
 )
 
-create table SpaceType -- типы мест (нижний, верхний, боковой)
-(
-	Id int identity(1,1) primary key,
-	[Name] nvarchar(20) not null
-)
-
-create table CarType -- С кондиционером, зимний, можно животных и т.д.
+create table CarType -- С услугами
 (
 	Id int identity(1,1) primary key,
 	[Code] nvarchar(5) not null unique,
@@ -222,7 +216,7 @@ create table CarType -- С кондиционером, зимний, можно животных и т.д.
 create table Car -- Вагоны
 (
 	Id int identity(1,1) primary key,
-	CarTypeId int foreign key references CarType not null,
+	[SerialNumber] nvarchar(10) not null,
 	PlaceTypeId int foreign key references PlaceType not null
 )
 
@@ -231,6 +225,7 @@ create table CarShedule
 	Id int identity(1,1) primary key,
 	[Number] int not null,
 	CarId int foreign key references Car not null,
+	CarTypeId int foreign key references CarType not null,
 	SheduleRoutesId int foreign key references [SheduleRoutes] not null
 )
 
@@ -239,7 +234,7 @@ create table [Space]
 	Id int identity(1,1) primary key,
 	[Number] int not null,
 	CarId int foreign key references Car not null,
-	SpaceTypeId int foreign key references SpaceType not null
+	IsInvalidOrBicycle bit null -- 1 инвалид, 0 - велосипед, null - обычный
 )
 
 create table Country
@@ -280,16 +275,10 @@ create table [User]
 	CountryId int foreign key references Country not null
 )
 
-create table Price
-(
-	Id int identity(1,1) primary key,
-	[Value] float not null
-)
-
 create table Ticket
 (
 	Id int identity(1,1) primary key,
-	PriceId int foreign key references Price not null,
+	Price float not null,
 	SpaceId int foreign key references [Space] not null,
 	UserId int foreign key references [User] null
 )
