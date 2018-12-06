@@ -7,30 +7,34 @@
 </head>
 <body>
 <div class="div">
-    <form action="http://r-ticket.chav:6608/car/create" method="POST">
-        <label>Серийный номер вагона
-            <input type="text" name="number" size="10" maxlength="10">
-        </label>
-        <label>Тип вагона
-            <select size="1" name="placeType">
-                <option disabled selected>Выберите тип вагона</option>
-                {{#placeTypes as |placeType|}}
-                    <option value="{{placeType.Id}}">{{placeType.ShortName}}</option>
-                {{/placeTypes}}
-            </select>
-        </label>
-        <input type="submit">
-        <input type="reset">
-        <br>
-        {{#cars as |car|}}
-            <p>
-                {{car.SerialNumber}}: {{car.PlaceType}}
-            </p>
-        {{/cars}}
-        <br>
-    </form>
-    <br>
-    <a href="http://r-ticket.chav:6608/car">Вернуться к вагонам</a>
+    <div class="add-car">
+        <form action="http://r-ticket.chav:6608/car/create" method="POST">
+            <label>Серийный номер вагона
+                <input type="text" name="number" size="10" maxlength="10">
+            </label>
+            <label>Тип вагона
+                <select size="1" name="placeType">
+                    <option disabled selected>Выберите тип вагона</option>
+                    {{#placeTypes as |placeType|}}
+                        <option value="{{placeType.Id}}">{{placeType.ShortName}}</option>
+                    {{/placeTypes}}
+                </select>
+            </label>
+            <input type="submit">
+            <input type="reset">
+            <br>
+            {{#cars as |car|}}
+                <p>
+                    {{car.SerialNumber}}: {{car.PlaceType}}
+                </p>
+            {{/cars}}
+            <br>
+        </form>
+    </div>
+
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/car">Вернуться к вагонам</a>
+    </div>
 </div>
 </body>
 </html>

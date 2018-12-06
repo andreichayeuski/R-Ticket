@@ -7,32 +7,33 @@
 </head>
 <body>
 <div class="div">
-    <form action="http://r-ticket.chav:6608/routes/create" method="POST">
-        <label>Начальная станция
-            <select size="1" name="depStationId">
-                <option disabled selected>Выберите начальную станцию</option>
-                {{#stations as |station|}}
-                    <option value="{{station.Id}}">{{station.Name}}</option>
-                {{/stations}}
-            </select>
-        </label>
-        <label>Конечная станция
-            <select size="1" name="arrStationId">
-                <option disabled selected>Выберите конечную станцию</option>
-                {{#stations as |station|}}
-                    <option value="{{station.Id}}">{{station.Name}}</option>
-                {{/stations}}
-            </select>
-        </label>
-        <br>
-        <input type="submit">
-    </form>
-    <br>
-    <table>
+    <div>
+        <form action="http://r-ticket.chav:6608/routes/create" method="POST">
+            <label>Начальная станция
+                <select size="1" name="depStationId">
+                    <option disabled selected>Выберите начальную станцию</option>
+                    {{#stations as |station|}}
+                        <option value="{{station.Id}}">{{station.Name}}</option>
+                    {{/stations}}
+                </select>
+            </label>
+            <label>Конечная станция
+                <select size="1" name="arrStationId">
+                    <option disabled selected>Выберите конечную станцию</option>
+                    {{#stations as |station|}}
+                        <option value="{{station.Id}}">{{station.Name}}</option>
+                    {{/stations}}
+                </select>
+            </label>
+            <br>
+            <input type="submit">
+        </form>
+    </div>
+    <div>
         {{#routesStations as |routesStation|}}
             <p>{{routesStation.DepartureStation}} - {{routesStation.ArrivalStation}}</p>
         {{/routesStations}}
-    </table>
+    </div>
 </div>
 </body>
 </html>

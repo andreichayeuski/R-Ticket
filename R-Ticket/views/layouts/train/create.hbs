@@ -7,39 +7,44 @@
 </head>
 <body>
 <div class="div">
-    <form action="http://r-ticket.chav:6608/train/create" method="POST">
-        <label>Номер поезда
-            <input type="text" name="number" size="10" maxlength="5">
-        </label>
-        <label>Тип поезда
-            <select size="1" name="trainType">
-                <option disabled selected>Выберите тип поезда</option>
-                {{#types as |type|}}
-                    <option value="{{type.Id}}">{{type.Name}}</option>
-                {{/types}}
-            </select>
-        </label>
-        <br>
-        <label>Начальная станция
-            <select size="1" name="departureStationId">
-                <option disabled selected>Выберите начальную станцию</option>
-                {{#stations as |station|}}
-                    <option value="{{station.Id}}">{{station.Name}}</option>
-                {{/stations}}
-            </select>
-        </label>
-        <br>
-        <label>Конечная станция
-            <select size="1" name="arrivalStationId">
-                <option disabled selected>Выберите конечную станцию</option>
-                {{#stations as |station|}}
-                    <option value="{{station.Id}}">{{station.Name}}</option>
-                {{/stations}}
-            </select>
-        </label>
-        <br>
-        <input type="submit">
-    </form>
+    <div class="form">
+        <form action="http://r-ticket.chav:6608/train/create" method="POST">
+            <label>Номер поезда
+                <input type="text" name="number" size="10" maxlength="5">
+            </label>
+            <label>Тип поезда
+                <select size="1" name="trainType">
+                    <option disabled selected>Выберите тип поезда</option>
+                    {{#types as |type|}}
+                        <option value="{{type.Id}}">{{type.Name}}</option>
+                    {{/types}}
+                </select>
+            </label>
+            <br>
+            <label>Начальная станция
+                <select size="1" name="departureStationId">
+                    <option disabled selected>Выберите начальную станцию</option>
+                    {{#stations as |station|}}
+                        <option value="{{station.Id}}">{{station.Name}}</option>
+                    {{/stations}}
+                </select>
+            </label>
+            <br>
+            <label>Конечная станция
+                <select size="1" name="arrivalStationId">
+                    <option disabled selected>Выберите конечную станцию</option>
+                    {{#stations as |station|}}
+                        <option value="{{station.Id}}">{{station.Name}}</option>
+                    {{/stations}}
+                </select>
+            </label>
+            <br>
+            <input type="submit">
+        </form>
+        <div class="link">
+            <a href="http://r-ticket.chav:6608/train">Вернуться к поездам</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

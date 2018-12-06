@@ -7,15 +7,44 @@
 </head>
 <body>
 <div class="div">
-    <form style="float: right" action="http://r-ticket.chav:6608/shedule/create" method="POST">
-        <fieldset style="width: 225px">
-            <legend>Добавить новую дату в расписание</legend>
-            <label>Дата
-                <input type="date" name="date" size="50">
+    <div class="shedule" style="min-width: 600px; width: auto">
+        <form id="sheduleForm" action="http://r-ticket.chav:6608/shedule" method="POST">
+            <label>Выберите дату:
+                <input type="date" name="calendar" value={{date}}>
             </label>
             <input type="submit">
-        </fieldset>
-    </form>
+        </form>
+
+        <table>
+            <tr>
+                <td colspan="2">Поезд</td>
+                <td>Отправление</td>
+                <td>Прибытие</td>
+            </tr>
+            {{#shedules as |shedule|}}
+                <tr>
+                    <td>{{shedule.Number}}</td>
+                    <td>{{shedule.DepStation}} - {{shedule.ArrStation}}
+                        <br>
+                        <span>{{shedule.Type}}</span>
+                    </td>
+                    <td>{{shedule.DepartureStation}}<br>{{{time shedule.DepartureTime}}}</td>
+                    <td>{{shedule.ArrivalStation}}<br>{{{time shedule.ArrivalTime}}}</td>
+                </tr>
+            {{/shedules}}
+        </table>
+    </div>
+    <div class="new-shedule">
+        <form style="float: right" action="http://r-ticket.chav:6608/shedule/create" method="POST">
+            <fieldset style="width: 225px">
+                <legend>Добавить новую дату в расписание</legend>
+                <label>Дата
+                    <input type="date" name="date" size="50">
+                </label>
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
 </div>
 </body>
 </html>

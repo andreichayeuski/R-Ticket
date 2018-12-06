@@ -7,42 +7,45 @@
 </head>
 <body>
 <div class="div">
-    <form action="http://r-ticket.chav:6608/station/create" method="POST">
-        <label>Название станции
-            <input type="text" name="name" size="50">
-        </label>
-        <br>
-        <label>Описание
-            <textarea name="description" wrap="soft"></textarea>
-        </label>
-        <br>
-        <label>Широта
-            <input type="text" name="latitude" size="10">
-        </label>
-        <br>
-        <label>Долгота
-            <input type="text" name="longitude" size="10">
-        </label>
-        <br>
-        <label>Тип
-            <input type="radio" value="0" checked id="notStation" name="isStation">
-            <label for="notStation">Остановочный пункт</label>
-            <input type="radio" value="1" id="isStation" name="isStation">
-            <label for="isStation">Станция</label>
-        </label>
-        <br>
-        <input type="submit">
-        <input type="reset">
-        <br>
-        <br>
+    <div class="form">
+        <form action="http://r-ticket.chav:6608/station/create" method="POST">
+            <label>Название станции
+                <input type="text" name="name" size="50">
+            </label>
+            <br>
+            <label>Описание
+                <textarea name="description" wrap="soft"></textarea>
+            </label>
+            <br>
+            <label>Широта
+                <input type="text" name="latitude" size="10">
+            </label>
+            <br>
+            <label>Долгота
+                <input type="text" name="longitude" size="10">
+            </label>
+            <br>
+            <label>Тип
+                <input type="radio" value="0" checked id="notStation" name="isStation">
+                <label for="notStation">Остановочный пункт</label>
+                <input type="radio" value="1" id="isStation" name="isStation">
+                <label for="isStation">Станция</label>
+            </label>
+            <br>
+            <input type="submit">
+            <input type="reset">
+        </form>
+    </div>
+    <div>
         <h3>Существующие</h3>
         {{#stations as |station|}}
             <a href="{{station.Id}}">{{station.Name}}</a>
             <br>
         {{/stations}}
-    </form>
-    <br>
-    <a href="http://r-ticket.chav:6608/station">Вернуться к списку станций</a>
+    </div>
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/station">Вернуться к списку станций</a>
+    </div>
 </div>
 </body>
 </html>

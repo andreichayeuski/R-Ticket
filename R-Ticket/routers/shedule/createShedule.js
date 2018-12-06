@@ -23,7 +23,7 @@ router.post('/', urlencodedParser, (req, res) => {
 			}
 			else
 			{
-
+				res.redirect('http://r-ticket.chav:6608/shedule');
 			}
 		})
 		.error((err) => {

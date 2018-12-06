@@ -233,7 +233,7 @@ create table [Space]
 (
 	Id int identity(1,1) primary key,
 	[Number] int not null,
-	CarId int foreign key references Car not null,
+	CarSheduleId int foreign key references CarShedule not null,
 	IsInvalidOrBicycle bit null -- 1 инвалид, 0 - велосипед, null - обычный
 )
 

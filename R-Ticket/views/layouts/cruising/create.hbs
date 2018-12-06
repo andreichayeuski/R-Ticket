@@ -9,45 +9,48 @@
 </head>
 <body>
 <div class="div">
-    <form action="http://r-ticket.chav:6608/cruising/create" method="POST">
-        <label>Поезд
-            <select size="1" name="trainId">
-                <option disabled selected>Выберите поезд</option>
-                {{#trains as |train|}}
-                    <option value="{{train.Id}}">{{train.Number}}: {{train.DepartureStation}} - {{train.ArrivalStation}}</option>
-                {{/trains}}
-            </select>
-        </label>
-        <br>
-        <label class="isDaily">Ежедневно
-            <input type="radio" value="1" checked id="isDaily" name="isDaily">
-            <label for="isDaily">да</label>
-            <input type="radio" value="0" id="notDaily" name="isDaily">
-            <label for="notDaily">нет</label>
-        </label>
-        <br>
-        <div class="hidden even">
-            <label>
-                <input type="radio" value="0" id="notEven" name="isEven">
-                <label for="notEven">По нечётным</label>
-                <input type="radio" value="1" id="isEven" name="isEven">
-                <label for="isEven">По чётным</label>
+    <div class="train">
+        <form action="http://r-ticket.chav:6608/cruising/create" method="POST">
+            <label>Поезд
+                <select size="1" name="trainId">
+                    <option disabled selected>Выберите поезд</option>
+                    {{#trains as |train|}}
+                        <option value="{{train.Id}}">{{train.Number}}: {{train.DepartureStation}} - {{train.ArrivalStation}}</option>
+                    {{/trains}}
+                </select>
             </label>
             <br>
-            {{#weekDays as |weekDay|}}
-                <label>{{weekDay.Name}}
-                    <input type="checkbox" class="weekDay" name="weekDays" value="{{weekDay.Id}}">
-                    <br>
+            <label class="isDaily">Ежедневно
+                <input type="radio" value="1" checked id="isDaily" name="isDaily">
+                <label for="isDaily">да</label>
+                <input type="radio" value="0" id="notDaily" name="isDaily">
+                <label for="notDaily">нет</label>
+            </label>
+            <br>
+            <div class="hidden even">
+                <label>
+                    <input type="radio" value="0" id="notEven" name="isEven">
+                    <label for="notEven">По нечётным</label>
+                    <input type="radio" value="1" id="isEven" name="isEven">
+                    <label for="isEven">По чётным</label>
                 </label>
-            {{/weekDays}}
-        </div>
-        <input type="submit">
-        <input type="reset">
-        <br>
-        <br>
-    </form>
-    <br>
-    <a href="http://r-ticket.chav:6608/cruising">Вернуться к курсированию</a>
+                <br>
+                {{#weekDays as |weekDay|}}
+                    <label>{{weekDay.Name}}
+                        <input type="checkbox" class="weekDay" name="weekDays" value="{{weekDay.Id}}">
+                        <br>
+                    </label>
+                {{/weekDays}}
+            </div>
+            <input type="submit">
+            <input type="reset">
+            <br>
+            <br>
+        </form>
+    </div>
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/cruising">Вернуться к курсированию</a>
+    </div>
 </div>
 </body>
 </html>

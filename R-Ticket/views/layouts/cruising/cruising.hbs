@@ -7,21 +7,25 @@
 </head>
 <body>
 <div class="div">
-    <h1>Дни курсирования</h1>
-    <a href="http://r-ticket.chav:6608/cruising/create">Изменить дни курсирования</a>
-    <table>
-        {{#cruising as |cruis|}}
-            <tr>
-                <td>{{cruis.Number}}</td>
-                <td>{{cruis.DepartureStation}} - {{cruis.ArrivalStation}}
-                    <br>
-                    <span>{{cruis.Type}}</span>
-                </td>
-                <td>
-                {{{weekDayHelper a cruisId=cruis.Id}}} {{{isDaily cruis.IsDaily}}} {{{isEven cruis.IsEven}}}</td>
-            </tr>
-        {{/cruising}}
-    </table>
+    <div class="cruising">
+        <h1>Дни курсирования</h1>
+        <table>
+            {{#cruising as |cruis|}}
+                <tr>
+                    <td>{{cruis.Number}}</td>
+                    <td>{{cruis.DepartureStation}} - {{cruis.ArrivalStation}}
+                        <br>
+                        <span>{{cruis.Type}}</span>
+                    </td>
+                    <td>
+                        {{{weekDayHelper a cruisId=cruis.Id}}} {{{isDaily cruis.IsDaily}}} {{{isEven cruis.IsEven}}}</td>
+                </tr>
+            {{/cruising}}
+        </table>
+    </div>
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/cruising/create">Изменить дни курсирования</a>
+    </div>
 </div>
 </body>
 </html>
