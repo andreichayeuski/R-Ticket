@@ -3,16 +3,6 @@ const router = express.Router();
 const createRoutes = require('./createRoutes');
 const bindRoutes = require('./bindRoutes');
 const db = require('../../db/db')(require('sequelize'));
-const Handlebars = require('handlebars');
-
-Handlebars.registerHelper('time', (str) =>
-{
-	str = str.slice(0, 5);
-	let text = Handlebars.escapeExpression(str);
-	return new Handlebars.SafeString(
-		text
-	);
-});
 
 router.use('/create', createRoutes);
 router.use('/bind', bindRoutes);

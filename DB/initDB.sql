@@ -203,7 +203,8 @@ create table PlaceType -- типы билетов (плацкарт, купе и т.п.)
 	Id int identity(1,1) primary key,
 	[Name] nvarchar(70) not null,
 	ShortName nvarchar(20) not null,
-	Code nvarchar(2) not null
+	Code nvarchar(2) not null,
+	[Count] int not null
 )
 
 create table CarType -- С услугами
@@ -234,7 +235,7 @@ create table [Space]
 	Id int identity(1,1) primary key,
 	[Number] int not null,
 	CarSheduleId int foreign key references CarShedule not null,
-	IsInvalidOrBicycle bit null -- 1 инвалид, 0 - велосипед, null - обычный
+	IsBusy bit not null default 0
 )
 
 create table Country

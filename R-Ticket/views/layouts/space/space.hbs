@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Места</title>
+    <script type="text/javascript" src="../jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" src="../scripts/space.js" ></script>
+    {{> header}}
+</head>
+<body>
+<div class="div">
+
+    <div>
+        <h1>Места</h1>
+        <table>
+            <tr>
+                <td colspan="2">Поезд</td>
+                <td>Отправление</td>
+                <td>Прибытие</td>
+                <td>Свободные места</td>
+            </tr>
+            {{#spaces as |space|}}
+                <tr>
+                    <td>{{space.Number}}</td>
+                    <td>{{space.DepStation}} - {{space.ArrStation}}
+                        <br>
+                        <span>{{space.Type}}</span>
+                    </td>
+                    <td>{{space.DepartureStation}}<br>{{{time space.DepartureTime}}}</td>
+                    <td>{{space.ArrivalStation}}<br>{{{time space.ArrivalTime}}}</td>
+                    <td id="{{space.CarSheduleId}}" class="free-spaces">{{space.Count}}</td>
+                </tr>
+            {{/spaces}}
+        </table>
+    </div>
+
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/space/create">Добавить места</a>
+    </div>
+
+    <div class="cd-popup" role="alert">
+
+        <div class="cd-popup-container">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

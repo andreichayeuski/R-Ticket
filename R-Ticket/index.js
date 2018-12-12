@@ -5,6 +5,15 @@ const favicon = require('serve-favicon');
 const Handlebars = require('handlebars');
 Handlebars.registerPartial('header', 'header');
 
+Handlebars.registerHelper('time', (str) =>
+{
+	str = str.slice(0, 5);
+	let text = Handlebars.escapeExpression(str);
+	return new Handlebars.SafeString(
+		text
+	);
+});
+
 const app = express();
 
 app.use(express.static(__dirname + '/public'));
@@ -26,6 +35,7 @@ app.use('/routes', require('./routers/routes/routes'));
 app.use('/shedule', require('./routers/shedule/shedule'));
 app.use('/cruising', require('./routers/cruising/cruising'));
 app.use('/car', require('./routers/car/car'));
+app.use('/space', require('./routers/space/space'));
 
 app.get('/', (req, res) => {
 	res.render('index');
