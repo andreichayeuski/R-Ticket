@@ -36,6 +36,7 @@ app.use('/shedule', require('./routers/shedule/shedule'));
 app.use('/cruising', require('./routers/cruising/cruising'));
 app.use('/car', require('./routers/car/car'));
 app.use('/space', require('./routers/space/space'));
+app.use('/user', require('./routers/user/user'));
 
 app.get('/', (req, res) => {
 	res.render('index');

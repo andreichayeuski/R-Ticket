@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователи</title>
+    {{> header}}
+</head>
+<body>
+<div class="div">
+    <div class="cruising">
+        <h1>Пользователи</h1>
+        <table>
+            {{#users as |user|}}
+                <tr>
+                    <td>{{user.FName}} {{user.SName}}</td>
+                </tr>
+            {{/users}}
+        </table>
+    </div>
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/user/create">Добавить пользователя</a>
+    </div>
+</div>
+</body>
+</html>

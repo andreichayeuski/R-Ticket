@@ -273,7 +273,8 @@ create table [User]
 	Telephone nvarchar(20) null,
 	[Login] nvarchar(50) not null,
 	[Password] nvarchar(30) not null,
-	CountryId int foreign key references Country not null
+	CountryId int foreign key references Country not null,
+	RoleId int not null
 )
 
 create table Ticket

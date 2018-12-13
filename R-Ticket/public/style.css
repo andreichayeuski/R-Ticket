@@ -329,6 +329,10 @@ html.active menu .header {
     transition: opacity 0.3s 0s, visibility 0s 0s;
 }
 
+form label
+{
+    width: 100px
+}
 
 .cd-popup-container {
     position: relative;

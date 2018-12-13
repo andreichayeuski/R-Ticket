@@ -39,3 +39,15 @@ insert into Country
 	values ('Беларусь', 'Синеокая')
 
 select * from Country
+
+insert into UserDB
+values ('defaultR-Ticket', 'default')
+
+select * from UserDB
+
+insert into UserRole
+values ('Диспетчер'),
+('Пользователь'),
+('Администратор')
+
+select * from UserRole
