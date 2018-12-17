@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Войти</title>
+    {{> header}}
+</head>
+<body>
+<div class="div">
+    <div class="form">
+        <form action="http://r-ticket.chav:6608/login" method="POST">
+            <label>Логин
+                <input required type="text" maxlength="50" name="login" size="50">
+            </label>
+            <br>
+            <label>Пароль
+                <input required type="password" maxlength="30" name="password" size="50">
+            </label>
+            <br>
+            <input type="submit">
+            <input type="reset">
+        </form>
+    </div>
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/user">Вернуться к списку пользователей</a>
+    </div>
+</div>
+</body>
+</html>

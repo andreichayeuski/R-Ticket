@@ -157,6 +157,17 @@ html.active #overlay {
     top: 0;
 }
 
+#login{
+    color: #FF5959;
+    display: block;
+    right: 0;
+    margin: 10px 20px 8px 20px;
+    overflow: hidden;
+    position: fixed;
+    text-align: center;
+    top: 0;
+}
+
 #intro {
     background-image: url('https://goo.gl/BlNbJE');
 }

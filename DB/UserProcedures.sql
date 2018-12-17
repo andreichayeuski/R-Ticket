@@ -45,12 +45,32 @@ as
 begin
 	select * from [User]
 end
-
+select * from UserDB
 go
 create procedure GetCountry
 as
 begin
 	select * from [Country]
+end
+
+go
+create procedure LoginIntoRTicket
+@login nvarchar(50),
+@password nvarchar(30)
+as
+begin
+	if (select count(*) from [User] 
+			where [Login] = @login and [Password] = @password) = 1
+			begin
+				select [Name], [Password] from UserDB
+					where Id = (select UserDBId from UserRole
+									where Id = (select RoleId from [User]
+													where [Login] = @login and [Password] = @password))
+			end
+	else
+		begin
+			select -1 as result
+		end
 end
 
 

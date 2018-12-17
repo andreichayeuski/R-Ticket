@@ -12,15 +12,55 @@
 <div class="div">
     <div class="form">
         <form action="http://r-ticket.chav:6608/user/create" method="POST">
-            <label>Цена
-                <input required type="text" name="price" size="50">
+            <label>Имя
+                <input required type="text" name="fname" size="50">
+            </label>
+            <br>
+            <label>Фамилия
+                <input required type="text" name="sname" size="50">
+            </label>
+            <br>
+            <label>Отчество (если есть)
+                <input type="text" name="mname" size="50">
+            </label>
+            <br>
+            <label>Имя на английском (из паспорта)
+                <input required type="text" name="fname_en" size="50">
+            </label>
+            <br>
+            <label>Фамилия на английском (из паспорта)
+                <input required type="text" name="sname_en" size="50">
+            </label>
+            <br>
+            <label>День рождения
+                <input required type="date" name="birthday" size="50">
+            </label>
+            <br>
+            <label>Паспорт
+                <input required type="text" name="passport" size="50">
+            </label>
+            <br>
+            <label>Телефон
+                <input type="text" name="telephone" id="telephone">
+            </label>
+            <br>
+            <label>E-mail
+                <input required name="email" type="email">
+            </label>
+            <br>
+            <label>Пароль
+                <input required name="password" type="password">
+            </label>
+            <br>
+            <label>Логин
+                <input required type="text" name="login" size="50">
             </label>
             <br>
             <label>Страна
-                <select required size="1" name="spaceId">
-                    {{#spaces as |space|}}
-                        <option value="{{space.Id}}">{{space.Munber}}</option>
-                    {{/spaces}}
+                <select required size="1" name="countryId">
+                    {{#countrys as |country|}}
+                        <option value="{{country.Id}}">{{country.Name}}</option>
+                    {{/countrys}}
                 </select>
             </label>
             <br>

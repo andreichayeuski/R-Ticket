@@ -255,7 +255,8 @@ create table UserDB
 create table UserRole
 (
 	Id int identity(1,1) primary key,
-	[Name] nvarchar(20) not null
+	[Name] nvarchar(20) not null,
+	UserDBId int foreign key references UserDB not null
 )
 
 create table [User]

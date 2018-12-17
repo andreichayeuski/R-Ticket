@@ -116,7 +116,7 @@ begin
 		join CarType ct on ct.Id = cs.CarTypeId
 		where cs.SheduleRoutesId = @routesShedule
 end;
-
+select * from CarShedule
 go
 create procedure AddCarShedule
 	@number int,

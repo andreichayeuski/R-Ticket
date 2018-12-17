@@ -41,7 +41,10 @@ insert into Country
 select * from Country
 
 insert into UserDB
-values ('defaultR-Ticket', 'default')
+values ('adminR-Ticket', 'admin'),
+('userR-Ticket', 'user'),
+('dispatcherR-Ticket', 'dispatcher'),
+('defaultR-Ticket', 'default')
 
 select * from UserDB
 
