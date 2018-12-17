@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -9,7 +8,7 @@ router.use(bodyParser.json());
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddShedule :date', {
+	req.db.sequelize.query('AddShedule :date', {
 		replacements:
 			{
 				date: req.body.date

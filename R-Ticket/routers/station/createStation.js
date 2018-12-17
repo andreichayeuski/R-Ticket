@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -9,7 +8,7 @@ router.use(bodyParser.json());
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
-	db.sequelize.query('GetStation')
+	req.db.sequelize.query('GetStation')
 		.then((result) => {
 			console.log(result[0]);
 			stations = result[0];
@@ -26,7 +25,7 @@ router.get('/', (req, res) => {
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddStation :name, :description, :latitude, :longitude, :isStation', {
+	req.db.sequelize.query('AddStation :name, :description, :latitude, :longitude, :isStation', {
 		replacements:
 			{
 				name: req.body.name,

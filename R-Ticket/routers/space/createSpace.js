@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -11,18 +10,18 @@ router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let date = new Date();
 	date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	getInfo(date, res);
+	getInfo(date, req, res);
 });
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	getInfo(req.body.date, res);
+	getInfo(req.body.date, req, res);
 });
 
-async function getInfo(date, res)
+async function getInfo(date, req, res)
 {
-	let cars = [], carShedule = [];
-	db.sequelize.query('GetCarOnShedule :date',
+	let carShedule = [];
+	req.db.sequelize.query('GetCarOnShedule :date',
 		{
 			replacements:
 				{

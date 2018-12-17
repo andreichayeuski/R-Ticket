@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const createCruising = require('./createCruising');
-const db = require('../../db/db')(require('sequelize'));
 const Handlebars = require('handlebars');
 
 Handlebars.registerHelper('isDaily', (isDaily) =>
@@ -59,7 +58,7 @@ router.use('/create', createCruising);
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
-	db.sequelize.query('GetCruising')
+	req.db.sequelize.query('GetCruising')
 		.then((result) => {
 			console.log(result[0]);
 			let cruising = result[0], weekDaysArray = [];

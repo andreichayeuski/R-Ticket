@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const createTicket = require('./createTicket');
-const db = require('../../db/db')(require('sequelize'));
 const bodyParser = require('body-parser');
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
@@ -13,7 +12,7 @@ router.use('/create', createTicket);
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let ticket = [];
-	db.sequelize.query('GetTicket')
+	req.db.sequelize.query('GetTicket')
 		.then((result) => {
 			console.log(result[0]);
 			ticket = result[0];
@@ -31,7 +30,7 @@ router.get('/', (req, res) => {
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
 	let sheduleRoutes = [];
-	db.sequelize.query('ShowSheduleRoutesOnDate :date', {
+	req.db.sequelize.query('ShowSheduleRoutesOnDate :date', {
 		replacements:
 			{
 				date: req.body.date
@@ -44,7 +43,7 @@ router.post('/', urlencodedParser, (req, res) => {
 			if (req.body.sheduleRoute !== undefined)
 			{
 				console.log('not undefined');
-				db.sequelize.query('GetCarSheduleByRoutes :sheduleRoute',
+				req.db.sequelize.query('GetCarSheduleByRoutes :sheduleRoute',
 					{
 						replacements:
 							{
@@ -54,7 +53,7 @@ router.post('/', urlencodedParser, (req, res) => {
 					.then((result) => {
 						let carShedule = result[0];
 						console.log(result[0]);
-						db.sequelize.query('ShowSheduleRoutesByPk :sheduleRoutesId',
+						req.db.sequelize.query('ShowSheduleRoutesByPk :sheduleRoutesId',
 							{
 								replacements:
 									{
@@ -99,7 +98,7 @@ router.post('/', urlencodedParser, (req, res) => {
 router.post('/get', urlencodedParser, (req, res) => {
 	console.log(req.originalUrl);
 	let ticket = [];
-	db.sequelize.query('GetAvaivableTicketsInCar :carSheduleId',
+	req.db.sequelize.query('GetAvaivableTicketsInCar :carSheduleId',
 		{
 			replacements:{
 				carSheduleId: parseInt(req.body.carSheduleId)

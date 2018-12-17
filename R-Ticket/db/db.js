@@ -21,9 +21,9 @@ const TicketHistory = require('./models/ticket/ticketHistory');
 
 const config = require('./config.json');
 
-module.exports = (Sequelize)=>
+module.exports = (Sequelize, login = config.login, password = config.password) =>
 {
-	const sequelize = new Sequelize(config.db, config.login, config.password, {
+	const sequelize = new Sequelize(config.db, login, password, {
 		host: config.host,
 		dialect: config.dialect,
 		logging: false,
@@ -101,10 +101,6 @@ module.exports = (Sequelize)=>
 		price,
 		ticket,
 		ticketHistory,
-
-		/*select * from UserDB
-		insert into UserDB
-		values ('defaultR-Ticket', 'default')*/
 
 		sequelize: sequelize,
 		Sequelize: Sequelize

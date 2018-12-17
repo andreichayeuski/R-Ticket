@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -10,15 +9,15 @@ router.use(bodyParser.json());
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let user = [], role = [], country = [];
-	db.sequelize.query('GetUser')
+	req.db.sequelize.query('GetUser')
 		.then((result) => {
 			console.log(result[0]);
 			user = result[0];
-			db.sequelize.query('GetRole')
+			req.db.sequelize.query('GetRole')
 				.then((result) => {
 					console.log(result[0]);
 					role = result[0];
-					db.sequelize.query('GetCountry')
+					req.db.sequelize.query('GetCountry')
 						.then((result) => {
 							console.log(result[0]);
 							country = result[0];
@@ -45,7 +44,7 @@ router.get('/', (req, res) => {
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('CreateUser :FName, :SName, :MName, :Email, :Birthday, :Sex' +
+	req.db.sequelize.query('CreateUser :FName, :SName, :MName, :Email, :Birthday, :Sex' +
 		', :Passport, :FNameEn, :SNameEn, :Telephone, :Login, :Password, :CountryId, :RoleId',
 		{
 			replacements:

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const createStation = require('./createStation');
-const db = require('../../db/db')(require('sequelize'));
 const Handlebars = require('handlebars');
 
 Handlebars.registerHelper('isStation', (IsStation) =>
@@ -24,7 +23,7 @@ router.use('/create', createStation);
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let stations = [];
-	db.sequelize.query('GetStation')
+	req.db.sequelize.query('GetStation')
 		.then((result) => {
 			console.log(result[0]);
 			stations = result[0];
@@ -42,7 +41,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) =>
 {
 	console.log(req.params);
-	db.sequelize.query('GetOneStation :id',
+	req.db.sequelize.query('GetOneStation :id',
 		{
 			replacements: {
 				id: parseInt(req.params.id)

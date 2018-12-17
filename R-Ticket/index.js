@@ -2,6 +2,8 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const path = require('path');
 const favicon = require('serve-favicon');
+const clientSessions = require("client-sessions");
+
 const Handlebars = require('handlebars');
 Handlebars.registerPartial('header', 'header');
 
@@ -17,6 +19,10 @@ Handlebars.registerHelper('time', (str) =>
 const app = express();
 
 app.use(express.static(__dirname + '/public'));
+
+app.use(clientSessions({
+	secret: '0GBlJZ9EKBt2Zbi2flRPvztczCewBxXK' // set this to a long random string!
+}));
 
 app.engine('hbs', hbs({
 	extname: 'hbs',

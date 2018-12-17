@@ -3,6 +3,12 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const db = require('../../db/db')(require('sequelize'));
 
+const clientSessions = require("client-sessions");
+
+router.use(clientSessions({
+	cookieName: 'user',
+	secret: '0GBlJZ9EKBt2Zbi2flRPvztczCewBxXK' // set this to a long random string!
+}));
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 router.use(bodyParser.json());
@@ -32,6 +38,8 @@ router.post('/', urlencodedParser, (req, res) => {
 			}
 			else
 			{
+				req.user.username = 'defaultR-Ticket'; //result[0][0].Name;
+				req.user.password = 'default'; //result[0][0].Password;
 				res.redirect('http://r-ticket.chav:6608');
 			}
 		})

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -12,12 +11,12 @@ router.get('/', (req, res) => {
 	let space = [];
 	let date = new Date();
 	date = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-	db.sequelize.query('GetSpace')
+	req.db.sequelize.query('GetSpace')
 		.then((result) => {
 			console.log(result[0]);
 			space = result[0];
 			console.log(space);
-			db.sequelize.query('GetUser')
+			req.db.sequelize.query('GetUser')
 				.then((result) => {
 					console.log(result[0]);
 					res.render('index',
@@ -48,7 +47,7 @@ router.post('/', urlencodedParser, (req, res) => {
 		console.log("create new tickets");
 		req.body.price = Math.round(parseFloat(req.body.price) * 100) / 100;
 		console.log(req.body);
-		db.sequelize.query('AddMoreTickets :price, :carId, :sheduleRoute', {
+		req.db.sequelize.query('AddMoreTickets :price, :carId, :sheduleRoute', {
 			replacements:
 				{
 					price: req.body.price,
@@ -66,7 +65,7 @@ router.post('/', urlencodedParser, (req, res) => {
 	else
 	{
 		let sheduleRoutes = [];
-		db.sequelize.query('ShowSheduleRoutesOnDate :date', {
+		req.db.sequelize.query('ShowSheduleRoutesOnDate :date', {
 			replacements:
 				{
 					date: req.body.date
@@ -79,7 +78,7 @@ router.post('/', urlencodedParser, (req, res) => {
 				if (req.body.sheduleRoute !== undefined)
 				{
 					console.log('not undefined');
-					db.sequelize.query('GetCarSheduleByRoutes :sheduleRoute',
+					req.db.sequelize.query('GetCarSheduleByRoutes :sheduleRoute',
 						{
 							replacements:
 								{
@@ -89,7 +88,7 @@ router.post('/', urlencodedParser, (req, res) => {
 						.then((result) => {
 							let carShedule = result[0];
 							console.log(result[0]);
-							db.sequelize.query('ShowSheduleRoutesByPk :sheduleRoutesId',
+							req.db.sequelize.query('ShowSheduleRoutesByPk :sheduleRoutesId',
 								{
 									replacements:
 										{

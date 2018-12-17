@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -10,15 +9,15 @@ router.use(bodyParser.json());
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let trains = [], routesStation = [];
-	db.sequelize.query('GetTrain')
+	req.db.sequelize.query('GetTrain')
 		.then((result) => {
 			console.log(result[0]);
 			trains = result[0];
-			db.sequelize.query('GetRoutesStation')
+			req.db.sequelize.query('GetRoutesStation')
 				.then((result) => {
 					console.log(result[0]);
 					routesStation = result[0];
-					db.sequelize.query('GetRoutes')
+					req.db.sequelize.query('GetRoutes')
 						.then((result) => {
 							console.log(result[0]);
 							let routes = result[0];
@@ -49,7 +48,7 @@ router.get('/', (req, res) => {
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('BindRoutesStation :routesStationId, :trainId, :depTime, :arrTime', {
+	req.db.sequelize.query('BindRoutesStation :routesStationId, :trainId, :depTime, :arrTime', {
 		replacements:
 			{
 				routesStationId: parseInt(req.body.routesStationId),

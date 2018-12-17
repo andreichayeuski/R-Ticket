@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -10,11 +9,11 @@ router.use(bodyParser.json());
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let types = [],	stations = [];
-	db.sequelize.query('GetTrainType')
+	req.db.sequelize.query('GetTrainType')
 		.then((result) => {
 			console.log(result[0]);
 			types = result[0];
-			db.sequelize.query('GetStation')
+			req.db.sequelize.query('GetStation')
 				.then((result) => {
 					console.log(result[0]);
 					stations = result[0];
@@ -38,7 +37,7 @@ router.get('/', (req, res) => {
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddTrain :typeId, :number, :departureStationId, :arrivalStationId', {
+	req.db.sequelize.query('AddTrain :typeId, :number, :departureStationId, :arrivalStationId', {
 		replacements:
 			{
 				typeId: req.body.trainType,

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const createSpace = require('./createSpace');
-const db = require('../../db/db')(require('sequelize'));
 
 const bodyParser = require('body-parser');
 
@@ -13,11 +12,11 @@ router.use('/create', createSpace);
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let space = [];
-	db.sequelize.query('GetSpace')
+	req.db.sequelize.query('GetSpace')
 		.then((result) => {
 			console.log(result[0]);
 			space = result[0];
-			db.sequelize.query('GetSpace')
+			req.db.sequelize.query('GetSpace')
 				.then((result) => {
 					console.log(result[0]);
 					space = result[0];
@@ -39,7 +38,7 @@ router.get('/', (req, res) => {
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.originalUrl);
 	let space = [];
-	db.sequelize.query('GetSpacesInCar :carSheduleId',
+	req.db.sequelize.query('GetSpacesInCar :carSheduleId',
 		{
 			replacements:{
 				carSheduleId: parseInt(req.body.carSheduleId)
@@ -47,7 +46,7 @@ router.post('/', urlencodedParser, (req, res) => {
 		})
 		.then((result) => {
 			space = result[0];
-			db.sequelize.query('GetCarSheduleByPk :carSheduleId',
+			req.db.sequelize.query('GetCarSheduleByPk :carSheduleId',
 				{
 					replacements:{
 						carSheduleId: parseInt(req.body.carSheduleId)

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const db = require('../../db/db')(require('sequelize'));
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -10,12 +9,12 @@ router.use(bodyParser.json());
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let cars = [];
-	db.sequelize.query('GetCar')
+	req.db.sequelize.query('GetCar')
 		.then((result) => {
 			console.log(result[0]);
 			cars = result[0];
 			console.log(cars);
-			db.sequelize.query('GetPlaceType')
+			req.db.sequelize.query('GetPlaceType')
 				.then((result) => {
 					console.log(result[0]);
 					res.render('index',
@@ -36,7 +35,7 @@ router.get('/', (req, res) => {
 
 router.post('/', urlencodedParser, (req, res) => {
 	console.log(req.body);
-	db.sequelize.query('AddCar :serialNumber, :placeTypeId', {
+	req.db.sequelize.query('AddCar :serialNumber, :placeTypeId', {
 		replacements:
 			{
 				serialNumber: req.body.number,
