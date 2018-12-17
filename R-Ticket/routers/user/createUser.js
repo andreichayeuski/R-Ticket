@@ -59,7 +59,7 @@ router.post('/', urlencodedParser, (req, res) => {
 					Passport: req.body.passport,
 					FNameEn: req.body.fname_en,
 					SNameEn: req.body.sname_en,
-					Telephone: req.body.telephone,
+					Telephone: req.body.telephone === '' ? undefined : req.body.telephone,
 					Login: req.body.login,
 					Password: req.body.password,
 					CountryId: parseInt(req.body.countryId),

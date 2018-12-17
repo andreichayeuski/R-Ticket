@@ -75,6 +75,29 @@ begin
 	order by r.DepartureTime asc
 end;
 
+go
+create procedure ShowSheduleRoutesByPk
+@sheduleRoutesId int
+as
+begin
+	select t.Id as Id, t.Number as Number, s1.[Name] as DepartureStation, s2.[Name] as ArrivalStation, type1.[Name] as [Type],
+	s3.[Name] as DepStation, s4.[Name] as ArrStation,
+	convert (varchar, r.DepartureTime, 108) as DepartureTime, 
+	convert (varchar, r.ArrivalTime, 108) as ArrivalTime
+		from Train t
+		join Station s3 on s3.Id = t.DepartureStationId
+		join Station s4 on s4.Id = t.ArrivalStationId
+		join TrainType type1 on type1.Id = t.TypeId
+		join [Routes] r on r.TrainId = t.Id
+		join RoutesStation rs on rs.Id = r.RoutesStationId
+		join Station s1 on s1.Id = rs.DepartureStationId
+		join Station s2 on s2.Id = rs.ArrivalStationId
+		join SheduleRoutes sr on sr.RoutesId = r.Id
+		where sr.Id = @sheduleRoutesId
+	order by r.DepartureTime asc
+end;
+
+exec ShowSheduleRoutesByPk 9
 
 go
 create procedure UpdateSheduleRoutes

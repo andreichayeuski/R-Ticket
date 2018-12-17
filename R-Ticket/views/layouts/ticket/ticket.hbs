@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Билеты</title>
+    <script type="text/javascript" src="../jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" src="../scripts/getTicket.js" ></script>
+    {{> header}}
+</head>
+<body>
+<div class="div">
+    <div class="cruising">
+        <h1>Билеты</h1>
+        <form id="dateForm" action="http://r-ticket.chav:6608/ticket" method="POST">
+            <label>Выберите дату:
+                <input id="date" name="date" type="date" value={{date}}>
+            </label>
+            <br>
+            <label>Маршрут в расписании
+                <select size="1" id="sheduleRoutes" name="sheduleRoute" style="width: auto">
+                    {{#if sheduleRouteSelected}}
+                        <option selected value="{{sheduleRouteSelected.Id}}">
+                            {{sheduleRouteSelected.Number}}
+                            <br>
+                            {{sheduleRouteSelected.DepStation}} - {{sheduleRouteSelected.ArrStation}}
+                            <br>
+                            {{sheduleRouteSelected.DepartureStation}} {{{time sheduleRouteSelected.DepartureTime}}}
+                            <br>
+                            {{sheduleRouteSelected.ArrivalStation}} {{{time sheduleRouteSelected.ArrivalTime}}}
+                        </option>
+                    {{else}}
+                        <option disabled selected>Выберите маршрут</option>
+                    {{/if}}
+                    {{#sheduleRoutes as |sheduleRoute|}}
+                        <option value="{{sheduleRoute.Id}}">
+                            {{sheduleRoute.Number}}
+                            <br>
+                            {{sheduleRoute.DepStation}} - {{sheduleRoute.ArrStation}}
+                            <br>
+                            {{sheduleRoute.DepartureStation}} {{{time sheduleRoute.DepartureTime}}}
+                            <br>
+                            {{sheduleRoute.ArrivalStation}} {{{time sheduleRoute.ArrivalTime}}}
+                        </option>
+                    {{/sheduleRoutes}}
+                </select>
+            </label>
+            <br>
+            <label>Вагон
+                <select id="carShedule" size="1" name="carSheduleId" style="width: auto">
+                    <option disabled selected>Выберите вагон</option>
+                    {{#carShedules as |carShedule|}}
+                        <option value="{{carShedule.Id}}">{{carShedule.OrderNumber}} {{carShedule.PlaceType}} {{carShedule.CarType}}</option>
+                    {{/carShedules}}
+                </select>
+            </label>
+        </form>
+        <table id="tickets">
+        </table>
+    </div>
+    <div class="link">
+        <a href="http://r-ticket.chav:6608/ticket/create">Добавить билеты к вагону</a>
+    </div>
+</div>
+</body>
+</html>

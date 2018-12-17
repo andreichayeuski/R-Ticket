@@ -7,7 +7,10 @@ begin
 	select c.Id as Id, c.SerialNumber as SerialNumber, p.ShortName as PlaceType from [Car] c
 	join PlaceType p on p.Id = c.PlaceTypeId
 end;
-
+select * from CarShedule
+update Car
+set Id = 1
+	select * from Train
 go
 create procedure AddCar
 	@serialNumber nvarchar(10),
@@ -101,6 +104,20 @@ begin
 end;
 
 go
+create alter procedure GetCarSheduleByRoutes
+@routesShedule int
+as
+begin
+	select cs.Id as Id, cs.Number as OrderNumber, c.Id as CarId, c.SerialNumber as SerialNumber,
+	p.ShortName as PlaceType, ct.Code as CarType
+		from CarShedule cs
+		join Car c on c.Id = cs.CarId
+		join PlaceType p on p.Id = c.PlaceTypeId 
+		join CarType ct on ct.Id = cs.CarTypeId
+		where cs.SheduleRoutesId = @routesShedule
+end;
+
+go
 create procedure AddCarShedule
 	@number int,
 	@carId int,
@@ -122,4 +139,6 @@ end;
 select * from CarShedule
 
 select * from Shedule
+
+select * from SheduleRoutes
 

@@ -1,5 +1,5 @@
 $(document).ready(() => {
-	$('.free-spaces').on('click', function(event){
+	$('.free-spaces').on('click', () => {
 		$('.cd-popup').addClass('is-visible');
 		loadData($(this).attr('id'));
 	});
@@ -10,11 +10,6 @@ $(document).ready(() => {
 			$(this).removeClass('is-visible');
 		}
 	});
-	/*$(document).keyup(function(event){
-		if(event.which=='27'){
-			$('.cd-popup').removeClass('is-visible');
-		}
-	});*/
 });
 
 function d2(n) {
@@ -34,9 +29,9 @@ function loadData(data)
 			var json = JSON.parse(xhr.responseText);
 
 			var depDate = json.train.Date + json.train.DepartureTime;
-			var departureDate = depDate.slice(0, 10) + ' ' + depDate.slice(11, 19);
+			var departureDate = depDate.slice(0, 10) + ' ' + depDate.slice(24, 29);
 			var arrDate = json.train.Date + json.train.ArrivalTime;
-			var arrivalDate = arrDate.slice(0, 10) + ' ' + arrDate.slice(11, 19);
+			var arrivalDate = arrDate.slice(0, 10) + ' ' + arrDate.slice(24, 29);
 
 			let spaceHTML = '<h1>СВОБОДНЫЕ МЕСТА</h1>'
 								+ `<p>${json.train.Number} `
