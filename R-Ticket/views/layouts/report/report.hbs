@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отчёты</title>
+    <script type="text/javascript" src="../jquery-3.3.1.min.js" ></script>
+    <script type="text/javascript" src="../scripts/report.js" ></script>
+    {{> header}}
+</head>
+<body>
+<div class="div" style="display: block">
+    <div class="reportDay">
+        <label>День
+            <input type="date" class="date" name="day" size="50">
+        </label>
+        <input type="button" class="btn-reportDay" value="Отчёт на день">
+        <span class="resultDay" style="margin-left: 20px;"></span>
+    </div>
+    <br>
+    <br>
+    <div class="reportInterval">
+        <label>Дата начала
+            <input type="date" class="dateStart" name="dateStart" size="50">
+        </label>
+        <label>Дата конца
+            <input type="date" class="dateEnd" name="dateEnd" size="50">
+        </label>
+        <input type="button" class="btn-reportInterval" value="Отчёт на интервал">
+        <span class="resultInterval" style="margin-left: 20px;"></span>
+    </div>
+    <br>
+    <br>
+    <div class="reportTrain">
+        <label>Поезд
+            <select size="1" class="train" name="trainId" style="width: auto">
+                <option disabled selected>Выберите поезд</option>
+                {{#trains as |train|}}
+                    <option value="{{train.Id}}">{{train.Number}}: {{train.DepartureStation}} - {{train.ArrivalStation}}</option>
+                {{/trains}}
+            </select>
+        </label>
+        <input type="button" class="btn-reportTrain" value="Отчёт на поезд">
+        <span class="resultTrain" style="margin-left: 20px;"></span>
+    </div>
+</div>
+</body>
+</html>
