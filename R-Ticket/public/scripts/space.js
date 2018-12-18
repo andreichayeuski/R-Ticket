@@ -1,7 +1,7 @@
 $(document).ready(() => {
-	$('.free-spaces').on('click', () => {
+	$('.free-spaces').on('click', (event) => {
 		$('.cd-popup').addClass('is-visible');
-		loadData($(this).attr('id'));
+		loadData($(event.target).attr('id'));
 	});
 
 	$('.cd-popup').on('click', function(event){

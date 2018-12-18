@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const createTicket = require('./createTicket');
+const takeTicket = require('./takeTicket');
 const bodyParser = require('body-parser');
 
 var urlencodedParser = bodyParser.urlencoded({extended: false});
@@ -8,9 +9,12 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 router.use(bodyParser.json());
 
 router.use('/create', createTicket);
+router.use('/take', takeTicket);
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
+	let date = new Date();
+	date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	let ticket = [];
 	req.db.sequelize.query('GetTicket')
 		.then((result) => {
@@ -19,7 +23,8 @@ router.get('/', (req, res) => {
 			res.render('index',
 				{
 					layout: 'ticket/ticket',
-					tickets: ticket
+					tickets: ticket,
+					date: date
 				});
 		})
 		.error((err) => {
