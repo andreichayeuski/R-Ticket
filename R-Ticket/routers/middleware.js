@@ -11,7 +11,7 @@ router.use(clientSessions({
 router.all('/*', async (req, res, next) => {
 	console.log('Auth...');
 	console.log(req.user);
-	if (req.user !== undefined)
+	if (req.user.username !== undefined)
 	{
 		req.db = require('../db/db')(Sequelize, req.user.username, req.user.password);
 	}

@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 
@@ -48,6 +49,7 @@ router.post('/day', urlencodedParser, (req, res) => {
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 
@@ -76,6 +78,7 @@ router.post('/interval', urlencodedParser, (req, res) => {
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 
@@ -103,6 +106,7 @@ router.post('/train', urlencodedParser, (req, res) => {
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 

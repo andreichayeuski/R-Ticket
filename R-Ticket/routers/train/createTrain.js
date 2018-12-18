@@ -28,10 +28,12 @@ router.get('/', (req, res) => {
 				})
 				.error((err) => {
 					console.log(err);
+					res.redirect('http://r-ticket.chav:6608');
 				});
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 
@@ -54,11 +56,12 @@ router.post('/', urlencodedParser, (req, res) => {
 			}
 			else
 			{
-
+				res.redirect('http://r-ticket.chav:6608');
 			}
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 

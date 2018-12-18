@@ -29,10 +29,12 @@ router.get('/', (req, res) => {
 				})
 				.error((err) => {
 					console.log(err);
+					res.redirect('http://r-ticket.chav:6608');
 				});
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 
@@ -57,9 +59,11 @@ router.post('/', urlencodedParser, (req, res) => {
 		})
 			.then((result) => {
 				console.log(result[0]);
+				res.redirect('http://r-ticket.chav:6608/ticket/create');
 			})
 			.error((err) => {
 				console.log(err);
+				res.redirect('http://r-ticket.chav:6608');
 			});
 	}
 	else
@@ -108,10 +112,12 @@ router.post('/', urlencodedParser, (req, res) => {
 								})
 								.error((err) => {
 									console.log(err);
+									res.redirect('http://r-ticket.chav:6608');
 								});
 						})
 						.error((err) => {
 							console.log(err);
+							res.redirect('http://r-ticket.chav:6608');
 						});
 				}
 				else
@@ -127,6 +133,7 @@ router.post('/', urlencodedParser, (req, res) => {
 			})
 			.error((err) => {
 				console.log(err);
+				res.redirect('http://r-ticket.chav:6608');
 			});
 	}
 });

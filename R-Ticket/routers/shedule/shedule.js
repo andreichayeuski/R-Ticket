@@ -27,6 +27,10 @@ router.get('/', (req, res) => {
 					shedules: result[0]
 				});
 		})
+		.error((err) => {
+			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
+		});
 });
 
 
@@ -50,6 +54,7 @@ router.post('/', urlencodedParser, (req, res) => {
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 

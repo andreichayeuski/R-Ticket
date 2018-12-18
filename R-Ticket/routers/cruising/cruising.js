@@ -91,6 +91,7 @@ router.get('/', (req, res) => {
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 
 });

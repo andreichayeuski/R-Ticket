@@ -9,11 +9,11 @@ router.use(bodyParser.json());
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);
 	let weekDays = [];
-	db.sequelize.query('GetWeekDay')
+	req.db.sequelize.query('GetWeekDay')
 		.then((result) => {
 			console.log(result[0]);
 			weekDays = result[0];
-			db.sequelize.query('GetTrain')
+			req.db.sequelize.query('GetTrain')
 				.then((result) => {
 					console.log(result[0]);
 					res.render('index',
@@ -25,10 +25,12 @@ router.get('/', (req, res) => {
 				})
 				.error((err) => {
 					console.log(err);
+					res.redirect('http://r-ticket.chav:6608');
 				});
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 
@@ -39,7 +41,7 @@ router.post('/', urlencodedParser, (req, res) => {
 		req.body.isEven = 2
 	}
 	console.log(req.body);
-	db.sequelize.query('AddCruising :trainId, :isDaily, :isEven', {
+	req.db.sequelize.query('AddCruising :trainId, :isDaily, :isEven', {
 		replacements:
 			{
 				trainId: parseInt(req.body.trainId),
@@ -59,7 +61,7 @@ router.post('/', urlencodedParser, (req, res) => {
 					{
 						weekDay = parseInt(weekDay);
 						console.log(weekDay);
-						db.sequelize.query('AddWeekDayCruising :trainId, :weekDayId',
+						req.db.sequelize.query('AddWeekDayCruising :trainId, :weekDayId',
 							{
 								replacements:
 									{
@@ -78,11 +80,12 @@ router.post('/', urlencodedParser, (req, res) => {
 			}
 			else
 			{
-
+				res.redirect('http://r-ticket.chav:6608');
 			}
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 

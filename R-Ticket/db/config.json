@@ -5,9 +5,12 @@
   "port": 1433,
   "host": "ANDREICHAYEUSKI",
   "dialect": "mssql",
+  "connectionTimeout": 300000,
+  "requestTimeout": 300000,
   "dialectOptions": {
     "instanceName": "MSSQLSERVER",
-    "encrypt": true
+    "encrypt": true,
+    "requestTimeout": 30000
   },
   "define": {
     "timestamps": true,

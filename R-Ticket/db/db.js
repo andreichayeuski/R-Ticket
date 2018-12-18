@@ -28,6 +28,9 @@ module.exports = (Sequelize, login = config.login, password = config.password, d
 		dialect: config.dialect,
 		logging: false,
 		port: config.port,
+		dialectOptions: config.dialectOptions,
+		connectionTimeout: config.connectionTimeout,
+		requestTimeout: config.requestTimeout,
 		define: {
 			timestamps: false,
 			paranoid: false,
@@ -35,6 +38,10 @@ module.exports = (Sequelize, login = config.login, password = config.password, d
 		},
 		options: {
 			instanceName: config.dialectOptions.instanceName
+		},
+		pool: {
+			idleTimeoutMillis: 300000,
+			max: 100
 		}
 	});
 

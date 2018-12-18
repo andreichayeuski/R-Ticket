@@ -20,18 +20,19 @@ router.post('/', urlencodedParser, (req, res) => {
 				}
 			})
 			.then((result) => {
-				console.log(result);
-				if (result === 1)
+				console.log(result[0][0]);
+				if (result[0][0] === 1)
 				{
 					res.redirect('http://r-ticket.chav:6608/ticket/ticket');
 				}
 				else
 				{
-
+					res.redirect('http://r-ticket.chav:6608');
 				}
 			})
 			.error((err) => {
 				console.log(err);
+				res.redirect('http://r-ticket.chav:6608');
 			});
 	}
 	else
@@ -44,18 +45,19 @@ router.post('/', urlencodedParser, (req, res) => {
 				}
 			})
 			.then((result) => {
-				console.log(result);
-				if (result === 1)
+				console.log(result[0][0]);
+				if (result[0][0] === 1)
 				{
 					res.redirect('http://r-ticket.chav:6608/ticket/ticket');
 				}
 				else
 				{
-
+					res.redirect('http://r-ticket.chav:6608');
 				}
 			})
 			.error((err) => {
 				console.log(err);
+				res.redirect('http://r-ticket.chav:6608');
 			});
 	}
 });

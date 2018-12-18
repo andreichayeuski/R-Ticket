@@ -9,7 +9,6 @@
 <div class="div">
     <div class="form">
         <form action="http://r-ticket.chav:6608/routes/bind" method="POST">
-            <div>
                 <label>Маршрут
                     <select size="1" name="routesStationId" style="width: auto">
                         <option disabled selected>Выберите маршрут</option>
@@ -26,8 +25,6 @@
                         {{/trains}}
                     </select>
                 </label>
-            </div>
-            <div>
                 <label>Время отправления
                     <input type="time" name="depTime" size="50">
                 </label>
@@ -35,7 +32,6 @@
                 <label>Время прибытия
                     <input type="time" name="arrTime" size="50">
                 </label>
-            </div>
             <input type="submit">
         </form>
     </div>

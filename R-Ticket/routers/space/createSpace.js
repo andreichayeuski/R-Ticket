@@ -40,13 +40,14 @@ async function getInfo(date, req, res)
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 }
 
 router.post('/new', urlencodedParser, (req, res) => {
 	console.log(req.originalUrl);
 	console.log(req.body);
-	db.sequelize.query('AddSpace :carSheduleId', {
+	req.db.sequelize.query('AddSpace :carSheduleId', {
 		replacements:
 			{
 				carSheduleId: parseInt(req.body.carSheduleId)
@@ -58,6 +59,7 @@ router.post('/new', urlencodedParser, (req, res) => {
 		})
 		.error((err) => {
 			console.log(err);
+			res.redirect('http://r-ticket.chav:6608');
 		});
 });
 
