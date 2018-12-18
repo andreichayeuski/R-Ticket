@@ -275,7 +275,7 @@ create table [User]
 	[Login] nvarchar(50) not null,
 	[Password] nvarchar(30) not null,
 	CountryId int foreign key references Country not null,
-	RoleId int not null
+	RoleId int foreign key references UserRole not null
 )
 
 create table Ticket

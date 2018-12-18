@@ -54,3 +54,8 @@ values ('Диспетчер'),
 ('Администратор')
 
 select * from UserRole
+
+
+GRANT EXECUTE ON OBJECT::RecoveryFromBackup
+    TO [adminR-Ticket];  
+GO  

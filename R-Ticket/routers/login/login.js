@@ -38,8 +38,8 @@ router.post('/', urlencodedParser, (req, res) => {
 			}
 			else
 			{
-				req.user.username = 'defaultR-Ticket'; //result[0][0].Name;
-				req.user.password = 'default'; //result[0][0].Password;
+				req.user.username = result[0][0].Name;
+				req.user.password = result[0][0].Password;
 				res.redirect('http://r-ticket.chav:6608');
 			}
 		})

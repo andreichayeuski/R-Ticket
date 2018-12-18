@@ -21,9 +21,9 @@ const TicketHistory = require('./models/ticket/ticketHistory');
 
 const config = require('./config.json');
 
-module.exports = (Sequelize, login = config.login, password = config.password) =>
+module.exports = (Sequelize, login = config.login, password = config.password, db = config.db) =>
 {
-	const sequelize = new Sequelize(config.db, login, password, {
+	const sequelize = new Sequelize(db, login, password, {
 		host: config.host,
 		dialect: config.dialect,
 		logging: false,
