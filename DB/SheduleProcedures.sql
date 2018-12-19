@@ -54,11 +54,11 @@ end;
 
 
 go
-create alter procedure ShowSheduleRoutesOnDate
+create procedure ShowSheduleRoutesOnDate
 @date date
 as
 begin
-	select t.Id as Id, t.Number as Number, s1.[Name] as DepartureStation, s2.[Name] as ArrivalStation, type1.[Name] as [Type],
+	select t.Id as Id, sr.Id as SheduleRoutesId, t.Number as Number, s1.[Name] as DepartureStation, s2.[Name] as ArrivalStation, type1.[Name] as [Type],
 	s3.[Name] as DepStation, s4.[Name] as ArrStation,
 	convert (varchar, r.DepartureTime, 108) as DepartureTime, 
 	convert (varchar, r.ArrivalTime, 108) as ArrivalTime

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Удалить места</title>
+    {{> header}}
+</head>
+<body>
+<div class="div">
+    <div class="form">
+        <form id="sheduleForm" action="http://r-ticket.chav:6608/space/remove" method="POST">
+            <label>Выберите дату:
+                <input type="date" name="date" value={{date}}>
+            </label>
+            <input type="submit">
+        </form>
+
+        <form action="http://r-ticket.chav:6608/space/remove/delete" method="POST">
+            <div>
+                <label>
+                    <select size="1" name="carSheduleId" style="width: auto">
+                        <option disabled selected>Выберите вагон</option>
+                        {{#carShedules as |carShedule|}}
+                            <option value="{{carShedule.Id}}">{{carShedule.Code}} {{carShedule.PlaceType}}
+                                {{carShedule.Number}}: {{carShedule.DepartureStation}} - {{carShedule.ArrivalStation}}</option>
+                        {{/carShedules}}
+                    </select>
+                </label>
+            </div>
+            <input type="submit">
+        </form>
+    </div>
+    <div class="carShedule">
+        <table>
+            {{#carShedules as |carShedule|}}
+                <tr>
+                    <td>{{carShedule.OrderNumber}} - {{carShedule.SerialNumber}}</td>
+                    <td>{{carShedule.PlaceType}} {{carShedule.CarType}}</td>
+                    <td>{{carShedule.Number}}: {{carShedule.DepartureStation}} - {{carShedule.ArrivalStation}}</td>
+                    <td>{{carShedule.Type}}</td>
+                    <td>{{carShedule.DepStation}} {{carShedule.DepartureTime}}</td>
+                    <td>{{carShedule.ArrStation}} {{carShedule.ArrivalTime}}</td>
+                </tr>
+            {{/carShedules}}
+        </table>
+    </div>
+</div>
+</body>
+</html>

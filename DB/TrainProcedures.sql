@@ -8,6 +8,7 @@ create procedure AddTrain
 	@arrivalStationId int
 as
 begin
+	begin try
 	declare @countBefore int,
 			@countAfter int,
 			@result int
@@ -17,6 +18,10 @@ begin
 	set @countAfter = (select count(*) from Train)
 	set @result = @countAfter - @countBefore
 	select @result as result
+	end try
+	begin catch
+		select -1 as result
+	end catch
 end
 
 

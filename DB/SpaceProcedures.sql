@@ -73,3 +73,18 @@ begin
 	select * from [Space]
 	where IsBusy != 1 and CarSheduleId = @carSheduleId
 end
+
+go
+create procedure DeleteSpaceOnCar
+	@carSheduleId int
+as
+begin
+	declare @countBefore int,
+			@countAfter int,
+			@result int
+	set @countBefore = (select count(*) from [Space])
+	delete from [Space] where CarSheduleId = @carSheduleId
+	set @countAfter = (select count(*) from [Space])
+	set @result = @countAfter - @countBefore
+	select @result as result
+end;

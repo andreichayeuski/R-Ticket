@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="div">
-    <div class="form">
+    <div class="form" style="display: block">
         <form id="sheduleForm" action="http://r-ticket.chav:6608/car/bind" method="POST">
             <label>Выберите дату:
                 <input type="date" name="date" value={{date}}>
@@ -21,7 +21,7 @@
                     <select size="1" name="sheduleRoutesId" style="width: auto">
                         <option disabled selected>Выберите маршрут</option>
                         {{#sheduleRoutes as |sheduleRoute|}}
-                            <option value="{{sheduleRoute.Id}}">
+                            <option value="{{sheduleRoute.SheduleRoutesId}}">
                                 {{sheduleRoute.Number}}
                                 <br>
                                 {{sheduleRoute.DepStation}} - {{sheduleRoute.ArrStation}}

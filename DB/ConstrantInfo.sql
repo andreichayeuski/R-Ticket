@@ -49,9 +49,9 @@ values ('adminR-Ticket', 'admin'),
 select * from UserDB
 
 insert into UserRole
-values ('Диспетчер'),
-('Пользователь'),
-('Администратор')
+values ('Диспетчер', 3),
+('Пользователь', 2),
+('Администратор', 1)
 
 select * from UserRole
 

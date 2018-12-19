@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const createSpace = require('./createSpace');
+const removeSpace = require('./removeSpace');
 
 const bodyParser = require('body-parser');
 
@@ -8,6 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 router.use(bodyParser.json());
 router.use('/create', createSpace);
+router.use('/remove', removeSpace);
 
 router.get('/', (req, res) => {
 	console.log(req.originalUrl);

@@ -173,16 +173,7 @@ create table SheduleRoutes
 	RoutesId int foreign key references [Routes] not null,
 	SheduleId int foreign key references [Shedule] not null
 )
-select * from RoutesStation
-select * from Station where Id = 33
-select * from [Routes]
-update RoutesStation
-set ArrivalStationId = 33
-where Id = 25
-update [Routes]
-set RoutesStationId = 7
-where Id = 15
-select * from Train where Id = 12
+
 create table Cruising-- дни курсирования
 (
 	Id int identity(1,1) primary key,

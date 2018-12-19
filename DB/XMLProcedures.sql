@@ -1,28 +1,29 @@
 use [R-Ticket]
 
 go
-create procedure [dbo].[import_xml]
+create procedure ImportFromXML
 as
 begin
 	declare @xml xml; 
-	select @xml = convert(xml, bulkcolumn, 2) from openrowset(bulk 'E:\resorts.xml', single_blob) as X 
+	select @xml = convert(xml, bulkcolumn, 2) from openrowset(bulk 'D:\place_types.xml', single_blob) as X 
 	select @xml
-		insert into country 
+		insert into PlaceType 
 		select 
-			P.value('Name[1]','VARCHAR(max)') AS Name,
-			P.value('visa_regime[1]','varchar(max)') as visa_regime,
-			P.value('visa_cost[1]','int') as visa_cost
-			FROM @xml.nodes('/resorts/resort') PropertyFeed(P);
+			P.value('Name[1]','nvarchar(70)') AS Name,
+			P.value('Code[1]','nvarchar(2)') as Code,
+			P.value('ShortName[1]','nvarchar(20)') as ShortName,
+			P.value('Count[1]','int') as Count
+			FROM @xml.nodes('/place_types/place_type') PropertyFeed(P);
 end;
 
 go
-create procedure [dbo].[export_xml]
+create procedure ExportToXML
 as
 begin
-EXEC master.dbo.sp_configure 'show advanced options', 1 
+EXEC [R-Ticket].dbo.sp_configure 'show advanced options', 1 
 RECONFIGURE 
-EXEC master.dbo.sp_configure 'xp_cmdshell', 1 
+EXEC [R-Ticket].dbo.sp_configure 'xp_cmdshell', 1 
 RECONFIGURE 
 
-EXEC xp_cmdshell 'bcp "use tourist_agency SELECT name,visa_regime,visa_cost FROM country FOR XML PATH (''country''), ROOT(''countries'')" queryout "E:\resorts.xml" -U admin_login -P iamboss -S USER-PC\MSSQL -w' 
+EXEC xp_cmdshell 'bcp "use [R-Ticket] SELECT Name,Code,ShortName,Count FROM PlaceType FOR XML PATH (''place_type''), ROOT(''place_types'')" queryout "D:\place_types.xml" -w -T' 
 end

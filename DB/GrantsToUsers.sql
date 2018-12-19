@@ -143,4 +143,9 @@ grant execute on object::TakeTicket
 
 grant execute on object::UpdateSheduleRoutes
     TO [adminR-Ticket], [dispatcherR-Ticket];  
-	select * from Train
+
+grant execute on object::ExportToXML
+    TO [adminR-Ticket];  
+
+grant execute on object::DeleteSpaceOnCar
+    TO [adminR-Ticket], [dispatcherR-Ticket];  
